@@ -1,17 +1,21 @@
-import express from 'express'
+import dotenv from "dotenv";
+dotenv.config();
+import express from "express";
+import recipes from "./api/recipes";
+import connectDB from "./config/config";
 
-const app = express()
+const app = express();
+connectDB();
+const PORT = process.env.PORT || 5000;
 
-const PORT = process.env.PORT || 5000
+app.use("/recipes", recipes);
+app.get("/", (req, res) => {
+  return res.send("Hello world");
+});
 
-app.use
-app.get("/",(req,res)=>{
-    return res.send("Hello world")
-})
-
-app.listen(PORT,(req,res)=>{
-    console.log(`server is working on port ${PORT}`)
-})
+app.listen(PORT, (req, res) => {
+  console.log(`server is working on port ${PORT}`);
+});
 
 //https://developer.edamam.com/admin/applications/1409619312049
 //https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata
