@@ -26,6 +26,7 @@
   "homepage": "https://github.com/BenedyktT/gastrofreak#readme",
   "devDependencies": {
     "esm": "^3.2.25",
+    "jest": "^25.1.0",
     "nodemon": "^2.0.2"
   },
   "dependencies": {
