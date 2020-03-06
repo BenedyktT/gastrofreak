@@ -3,14 +3,38 @@ import axios from "axios";
 
 const router = express.Router();
 
-const getMeal = async (queryType, item) => {
+const getMeal = async (queryType, item, serving = 1) => {
   try {
     const type = queryType === "s" ? "search" : "lookup";
     const response = await axios.get(
       `https://www.themealdb.com/api/json/v1/1/${type}.php?${queryType}=${item}`
     );
 
-    return response;
+    const recipe = response.data.meals.map((meal, i, arr) => ({
+      title: meal.strMeal,
+      prep: meal.strInstructions,
+      yield: serving,
+      ingr: arr.reduce((acc, curr) => {
+        const extractItem = includes => {
+          return (
+            Object.keys(meal)
+              //get keys where there are ingredients
+              .filter(e => e.includes(includes))
+              //create object with ingredients only
+              .map(key => curr[key] && curr[key])
+              //remove null and empty strings
+              .filter(e => e)
+          );
+        };
+        const ingr = extractItem("strIngredient");
+        const measures = extractItem("strMeasure");
+        //combine measure and ingredients
+        acc = ingr.map((e, i) => `${measures[i]} ${e}`);
+
+        return acc;
+      }, [])
+    }));
+    return recipe;
   } catch (error) {
     console.error(error);
     return error;
@@ -28,8 +52,8 @@ router.get("/queryType=:queryType/:item", async (req, res) => {
   }
 
   try {
-    const response = await getMeal(queryType, item);
-    return res.json(response.data);
+    const response = await getMeal(queryType, item, 1);
+    return res.json(response);
   } catch (error) {
     res.status(500).json("Internal Server error");
   }
@@ -52,33 +76,12 @@ router.get("/categories=:category", async (req, res) => {
 //post
 //post recipe and get nutrition values
 
-router.post("/", async (req, res) => {
-  const data = {
-    title: "Fresh Ham Roasted With Rye Bread and Dried Fruit Stuffing",
-    prep:
-      "1. Have your butcher bone and butterfly the ham and score the fat in a diamond pattern. ...",
-    yield: "About 15 servings",
-    ingr: [
-      "1 fresh ham, about 18 pounds, prepared by your butcher (See Step 1)",
-      "7 cloves garlic, minced",
-      "1 tablespoon caraway seeds, crushed",
-      "4 teaspoons salt",
-      "Freshly ground pepper to taste",
-      "1 teaspoon olive oil",
-      "1 medium onion, peeled and chopped",
-      "3 cups sourdough rye bread, cut into 1/2-inch cubes",
-      "1 1/4 cups coarsely chopped pitted prunes",
-      "1 1/4 cups coarsely chopped dried apricots",
-      "1 large tart apple, peeled, cored and cut into 1/2-inch cubes",
-      "2 teaspoons chopped fresh rosemary",
-      "1 egg, lightly beaten",
-      "1 cup chicken broth, homemade or low-sodium canned"
-    ]
-  };
+router.get("/:id", async (req, res) => {
+  const data = await getMeal("i", req.params.id);
   try {
     const response = await axios.post(
       `https://api.edamam.com/api/nutrition-details?app_id=${process.env.APPLICATION_ID}&app_key=${process.env.APPLICATION_KEY}`,
-      data,
+      data[0],
       { headers: { ContentType: "application/json" } }
     );
     return res.json(response.data);
