@@ -1,0 +1,14 @@
+.footernav {
+  display: flex;
+  width: 100vw;
+  padding: 1rem 0;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  & .footernav__element {
+    width: 25px;
+    height: 25px;
+    fill: $black;
+  }
+}
