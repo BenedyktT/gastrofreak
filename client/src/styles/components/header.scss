@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  & .header__greet {
-    fill: red;
+  img {
+    width: 150px;
   }
 }
