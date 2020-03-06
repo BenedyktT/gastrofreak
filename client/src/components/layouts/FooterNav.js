@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import classnames from "classnames";
-import { ReactComponent as Account } from "../assets/account.svg";
-import { ReactComponent as Dashboard } from "../assets/dashboard.svg";
-import { ReactComponent as Add } from "../assets/add.svg";
-import { ReactComponent as Favourite } from "../assets/favourite.svg";
-import { ReactComponent as Search } from "../assets/search.svg";
+import { ReactComponent as Account } from "../../assets/account.svg";
+import { ReactComponent as Dashboard } from "../../assets/dashboard.svg";
+import { ReactComponent as Add } from "../../assets/add.svg";
+import { ReactComponent as Favourite } from "../../assets/favourite.svg";
+import { ReactComponent as Search } from "../../assets/search.svg";
 const FooterNav = () => {
   const [elementActive, setElementActive] = useState({});
   const activate = e => {
