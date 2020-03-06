@@ -1,0 +1,10 @@
+.header {
+  padding: $padding;
+  background: $gradient-blue;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & .header__greet {
+    fill: red;
+  }
+}

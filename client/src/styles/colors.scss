@@ -1,0 +1,18 @@
+$blue-light: #26b7cb;
+$blue-dark: #185e68;
+$blue-a: #1ecbf4;
+$blue-b: #194dc3;
+$blue-primary: #1592e6;
+$occupied: #6200ee;
+$text-white: #e2dada;
+$dark: rgb(197, 193, 193);
+$green-a: #ccff66;
+$green-b: #2a8b4e;
+$white: #f3f3f3;
+$black: #303c42;
+
+$gradient-blue: linear-gradient($blue-light, $blue-dark);
+$gradient-blue-alternative: linear-gradient($blue-a, $blue-b);
+$gradient-green: linear-gradient($green-a, $green-b);
+$gradient-success: linear-gradient(130deg, #2a8b4e 50%, #1592e6);
+$gradient-danger: linear-gradient(130deg, #ef427c 50%, #1592e6);

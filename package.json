@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest",
     "start": "node -r esm server.js",
-    "server": "nodemon -r esm server.js"
+    "server": "nodemon -r esm server.js --ignore './client/'",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -25,8 +27,8 @@
   },
   "homepage": "https://github.com/BenedyktT/gastrofreak#readme",
   "devDependencies": {
+    "concurrently": "^5.1.0",
     "esm": "^3.2.25",
-    "jest": "^25.1.0",
     "nodemon": "^2.0.2"
   },
   "dependencies": {
