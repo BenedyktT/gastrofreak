@@ -10,5 +10,23 @@
     width: 25px;
     height: 25px;
     fill: $black;
+    transition: 350ms ease;
+    pointer-events: none;
+    &.active {
+      fill: $green-b;
+    }
+  }
+}
+.footernav__elements {
+  display: flex;
+  flex-direction: column;
+}
+.footernav__text {
+  font-size: $small;
+  text-align: center;
+  display: block;
+  visibility: hidden;
+  &.active {
+    visibility: visible;
   }
 }
