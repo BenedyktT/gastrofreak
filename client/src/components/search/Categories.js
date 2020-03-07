@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { getCategories } from "../../redux/actions/recipeActions";
 
-const Categories = () => {
+const Categories = ({ getCategories, categories }) => {
+  useEffect(() => {
+    if (!categories.length) {
+      getCategories();
+    }
+  }, []);
   return (
     <div className="category">
       <h3 className="text-big">Or pick category:</h3>
@@ -9,4 +16,7 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default connect(
+  state => ({ categories: state.recipeReducer.categories }),
+  { getCategories }
+)(Categories);
