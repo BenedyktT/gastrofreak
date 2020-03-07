@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { getCategories } from "../../redux/actions/recipeActions";
+import Category from "./Category";
+import { Link } from "react-router-dom";
 
 const Categories = ({ getCategories, categories }) => {
   useEffect(() => {
@@ -9,9 +11,18 @@ const Categories = ({ getCategories, categories }) => {
     }
   }, []);
   return (
-    <div className="category">
+    <div className="category-wrapper">
       <h3 className="text-big">Or pick category:</h3>
-      <div className="category__grid"></div>
+      <ul className="categories__grid">
+        {categories.map(({ strCategory, strCategoryThumb, idCategory }) => (
+          <Category
+            key={idCategory}
+            className="categories_item"
+            thumb={strCategoryThumb}
+            title={strCategory}
+          />
+        ))}
+      </ul>
     </div>
   );
 };
