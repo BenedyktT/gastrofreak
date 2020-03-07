@@ -3,11 +3,12 @@ dotenv.config();
 import express from "express";
 import recipes from "./api/recipes";
 import connectDB from "./config/config";
+import categories from "./api/categories";
 
 const app = express();
 connectDB();
 const PORT = process.env.PORT || 5000;
-
+app.use("/categories", categories);
 app.use("/recipes", recipes);
 app.get("/", (req, res) => {
   return res.send("Hello world");

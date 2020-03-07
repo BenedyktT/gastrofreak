@@ -4,3 +4,8 @@
 @import "./components//header.scss";
 @import "./components//footer.scss";
 @import "./components/search/searchbar.scss";
+@import "./components/categories/category.scss";
+@import "./components/categories/meals.scss";
+.App {
+  margin-bottom: 5rem;
+}
