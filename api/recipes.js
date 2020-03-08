@@ -30,7 +30,7 @@ router.get("/queryType=:queryType/:item", async (req, res) => {
 //post recipe and get nutrition values
 
 router.get("/:id", async (req, res) => {
-	const data = await getMeal("i", req.params.id, 10);
+	const data = await getMeal("i", req.params.id, 4);
 
 	try {
 		const response = await axios.post(

@@ -8,24 +8,25 @@ import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import Search from "./components/search/Search";
 import CategoryList from "./components/search/CategoryList";
 import Recipe from "./components/recipes/Recipe";
+import GoBack from "./components/layouts/GoBack";
 
 function App() {
-  return (
-    <Provider store={store}>
-      <div className="App">
-        <Header />
-        <Router>
-          <Switch>
-            <Route exact path="/search" />
-            <Route exact path="/" component={Search} />
-            <Route exact path="/category/:category" component={CategoryList} />
-            <Route exact path="/meal/:id" component={Recipe} />
-          </Switch>
-        </Router>
-      </div>
-      <FooterNav />
-    </Provider>
-  );
+	return (
+		<Provider store={store}>
+			<div className="App">
+				<Header />
+				<Router>
+					<Switch>
+						<Route exact path="/search" />
+						<Route exact path="/" component={Search} />
+						<Route exact path="/category/:category" component={CategoryList} />
+						<Route exact path="/meal/:id" component={Recipe} />
+					</Switch>
+				</Router>
+			</div>
+			<FooterNav />
+		</Provider>
+	);
 }
 
 export default App;
