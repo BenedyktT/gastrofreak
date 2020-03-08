@@ -62,6 +62,7 @@
   border-radius: 5px;
   padding: $padding 3rem;
   width: 60%;
+  color:$white
 }
 .recipe__health-labels,
 .recipe__prep {
@@ -91,6 +92,7 @@
   border-radius: 5px;
   background-color: grey;
   width: 85%;
+  color: $white
 }
 .ingredient__elements {
   display: grid;
