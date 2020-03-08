@@ -4,18 +4,22 @@ import express from "express";
 import recipes from "./api/recipes";
 import connectDB from "./config/config";
 import categories from "./api/categories";
+import user from "./api/user";
+import auth from "./api/auth";
 
 const app = express();
 connectDB();
 const PORT = process.env.PORT || 5000;
+app.use("/user", user);
+app.use("/auth", auth);
 app.use("/categories", categories);
 app.use("/recipes", recipes);
 app.get("/", (req, res) => {
-  return res.send("Hello world");
+	return res.send("Hello world");
 });
 
 app.listen(PORT, (req, res) => {
-  console.log(`server is working on port ${PORT}`);
+	console.log(`server is working on port ${PORT}`);
 });
 
 //https://developer.edamam.com/admin/applications/1409619312049
