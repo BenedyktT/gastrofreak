@@ -8,7 +8,7 @@ import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import Search from "./components/search/Search";
 import CategoryList from "./components/search/CategoryList";
 import Recipe from "./components/recipes/Recipe";
-import GoBack from "./components/layouts/GoBack";
+import Login from "./components/login/Login";
 
 function App() {
 	return (
@@ -16,9 +16,9 @@ function App() {
 			<div className="App">
 				<Header />
 				<Router>
+					<Route exact path="/" component={Login} />
 					<Switch>
-						<Route exact path="/search" />
-						<Route exact path="/" component={Search} />
+						<Route exact path="/search" component={Search} />
 						<Route exact path="/category/:category" component={CategoryList} />
 						<Route exact path="/meal/:id" component={Recipe} />
 					</Switch>
