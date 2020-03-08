@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import NutritionTable from "./NutritionTable";
 import { getRecipe } from "../../redux/actions/recipeActions";
-const Recipe = ({ getRecipe, recipe, match }) => {
+import GoBack from "../layouts/GoBack";
+const Recipe = ({ getRecipe, recipe, match, history }) => {
 	useEffect(() => {
 		getRecipe(match.params.id);
 	}, []);
+	const [portion, setPortion] = useState(300);
 	const render = () => {
 		const {
 			prep,
@@ -16,9 +18,10 @@ const Recipe = ({ getRecipe, recipe, match }) => {
 			healthLabels,
 			nutrients
 		} = recipe;
+
 		return (
 			<div className="recipe">
-				{}
+				<GoBack history={history} />
 				<div className="recipe__title">{title}</div>
 				<div className="recipe__health-labels">
 					<h3>Health labels:</h3>
@@ -27,12 +30,26 @@ const Recipe = ({ getRecipe, recipe, match }) => {
 					</p>
 				</div>
 				<div className="recipe__nutrition-summary">
-					<span>Serving: 4</span>
+					<span>
+						<label htmlFor="portion">Portion:</label>
+						<input
+							style={{ width: "100px" }}
+							name="portion"
+							type="number"
+							value={portion}
+							onChange={e => setPortion(e.target.value)}
+						/>
+						g
+					</span>
 					<span>Total weight: {parseInt(totalWeight)}g</span>
-					<span>Kcal per serving: {calories}</span>
+					<span>Kcal: {calories}</span>
 				</div>
 				<div className="recipe__nutrition-details">
-					<NutritionTable nutrients={nutrients} />
+					<NutritionTable
+						nutrients={nutrients}
+						portion={portion}
+						totalWeight={totalWeight}
+					/>
 				</div>
 				<div className="recipe__prep">
 					<h3>Prep:</h3>
