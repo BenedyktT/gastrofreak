@@ -1,17 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 import { ReactComponent as Account } from "../../assets/account.svg";
 import { ReactComponent as Dashboard } from "../../assets/dashboard.svg";
 import { ReactComponent as Add } from "../../assets/add.svg";
 import { ReactComponent as Favourite } from "../../assets/favourite.svg";
 import { ReactComponent as Search } from "../../assets/search.svg";
+import { withRouter } from "react-router";
 
 import { Link } from "react-router-dom";
-const FooterNav = () => {
+const FooterNav = ({ history }) => {
+	const { pathname } = history.location;
 	const [elementActive, setElementActive] = useState({});
 	const activate = e => {
 		setElementActive({ [e.target.name]: true });
 	};
+	const trackPath = path => {
+		if (path.includes("dashboard"))
+			return setElementActive({ dashboard: true });
+		if (path.includes("search")) return setElementActive({ search: true });
+		if (path.includes("account")) return setElementActive({ account: true });
+		if (path.includes("favourite"))
+			return setElementActive({ favourite: true });
+		if (path.includes("add")) return setElementActive({ add: true });
+		setElementActive({});
+		return;
+	};
+	useEffect(() => {
+		trackPath(pathname);
+	}, [pathname]);
 	return (
 		<nav className="footernav">
 			<div className="footernav__elements">
@@ -98,4 +114,4 @@ const FooterNav = () => {
 	);
 };
 
-export default FooterNav;
+export default withRouter(FooterNav);

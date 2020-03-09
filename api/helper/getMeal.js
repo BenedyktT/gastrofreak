@@ -9,7 +9,6 @@ export default async (queryType, item, serving = 1) => {
 			const recipe = response.data.meals.map((meal, i, arr) => ({
 				title: meal.strMeal,
 				prep: meal.strInstructions,
-				yield: serving,
 				ingr: arr.reduce((acc, curr) => {
 					const extractItem = includes => {
 						return (

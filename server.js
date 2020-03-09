@@ -6,6 +6,7 @@ import connectDB from "./config/config";
 import categories from "./api/categories";
 import user from "./api/user";
 import auth from "./api/auth";
+import favourite from "./api/favourite";
 
 const app = express();
 connectDB();
@@ -15,6 +16,7 @@ app.use("/user", user);
 app.use("/auth", auth);
 app.use("/categories", categories);
 app.use("/recipes", recipes);
+app.use("/favourite", favourite);
 app.get("/", (req, res) => {
 	return res.send("Hello world");
 });
