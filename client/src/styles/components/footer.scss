@@ -1,5 +1,6 @@
 .footernav {
   display: flex;
+  background: $gradient-blue;
   width: 100vw;
   overflow: hidden;
   padding: 1rem 0;
@@ -14,7 +15,7 @@
     transition: 350ms ease;
     pointer-events: none;
     &.active {
-      fill: $green-b;
+      fill: $white;
     }
   }
 }
@@ -27,6 +28,7 @@
   text-align: center;
   display: block;
   visibility: hidden;
+  color:$white;
   &.active {
     visibility: visible;
   }

@@ -10,6 +10,7 @@ import auth from "./api/auth";
 const app = express();
 connectDB();
 const PORT = process.env.PORT || 5000;
+app.use(express.json({ extended: false }));
 app.use("/user", user);
 app.use("/auth", auth);
 app.use("/categories", categories);
