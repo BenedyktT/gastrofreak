@@ -6,12 +6,18 @@ import { logout } from "../../redux/actions/authActions";
 const Header = ({ isAuthenticated, user, logout }) => {
 	return (
 		<div className="header">
-			<img src={logo} />
+			<Link to="/">
+				<img src={logo} />
+			</Link>
 			<div className="header__greet">
 				{isAuthenticated ? (
 					<div>
-						<div>{user && user.name}</div>
-						<Link to="/" onClick={() => logout()}>
+						<div style={{ color: "white" }}>{user && user.name}</div>
+						<Link
+							style={{ color: "white", border: "1px 1px 1px white" }}
+							to="/"
+							onClick={() => logout()}
+						>
 							Log out
 						</Link>
 					</div>
