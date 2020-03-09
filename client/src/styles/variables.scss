@@ -12,3 +12,28 @@ $small: 0.7rem;
   font-size: 1.3rem;
   font-weight: 400;
 }
+
+.danger {
+  color: $danger
+}
+.success{
+  color: $success
+}
+
+.alert {
+  color: black;
+  text-align: center;
+  width: 100%;
+  margin: 1rem 0;
+  position: fixed;
+}
+.alert-danger {
+  border: 1px solid red;
+  color: red;
+  background: rgba($danger, 0.2);
+}
+.alert-success {
+  border: 1px solid $success;
+  color: $success;
+  background: rgba($success, 0.2);
+}
