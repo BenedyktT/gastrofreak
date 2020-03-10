@@ -1,12 +1,12 @@
 import React from "react";
 import SearchRecipes from "../search/SearchRecipes";
-import CategoryList from "../search/CategoryList";
+import FavouriteList from "./FavouriteList";
 
-const Favourite = () => {
+const Favourite = ({ history }) => {
 	return (
 		<div>
 			<SearchRecipes title={"Search for your favourite recipe: "} />
-			<CategoryList />
+			<FavouriteList history={history} />
 		</div>
 	);
 };

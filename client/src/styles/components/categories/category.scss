@@ -43,3 +43,11 @@
   height: 100%;
   width: 100%;
 }
+.item-container{
+  position: relative;
+}
+.category__item-button{
+  position: absolute;
+  z-index: 100;
+  top:1rem; right:1rem
+}

@@ -5,7 +5,8 @@ import Recipe from "../models/Recipe";
 import User from "../models/User";
 import getMeal from "./helper/getMeal";
 const router = express.Router();
-
+//@private
+//get list of favourite
 router.get("/", auth, async (req, res) => {
 	try {
 		const find = await Recipe.find({ user: req.user });
@@ -18,6 +19,10 @@ router.get("/", auth, async (req, res) => {
 		res.status(500).json("error");
 	}
 });
+
+//@private
+//delete from favourite list
+
 router.delete("/:id", auth, async (req, res) => {
 	const { id } = req.params;
 	try {
@@ -28,13 +33,15 @@ router.delete("/:id", auth, async (req, res) => {
 		res.status(500).json("error");
 	}
 });
+
+//@private
+//add to favourite list
 router.post("/:id", auth, async (req, res) => {
 	try {
 		const { id } = req.params;
 		const user = await User.findById(req.user);
 		const meal = await getMeal("i", id);
 		const isExistingOnFavourite = await Recipe.findOne({ recipeId: id });
-		console.log(isExistingOnFavourite);
 		if (user && meal && !isExistingOnFavourite) {
 			const addRecipeToFavourite = new Recipe({
 				user: req.user,
