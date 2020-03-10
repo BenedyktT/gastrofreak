@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import NutritionTable from "./NutritionTable";
-import { getRecipe } from "../../redux/actions/recipeActions";
+import { getRecipe, destroyRecipe } from "../../redux/actions/recipeActions";
 import GoBack from "../layouts/GoBack";
-const Recipe = ({ getRecipe, recipe, match, history }) => {
+const Recipe = ({ getRecipe, recipe, match, history, destroyRecipe }) => {
+	useEffect(() => {}, []);
 	useEffect(() => {
-		getRecipe(match.params.id);
+		const isExternalRecipe = history.location.pathname.includes("meal");
+		if (isExternalRecipe) {
+			getRecipe(match.params.id);
+		}
+		return () => {
+			destroyRecipe();
+		};
 	}, []);
 	const [portion, setPortion] = useState(300);
 	const render = () => {
@@ -71,5 +78,6 @@ const Recipe = ({ getRecipe, recipe, match, history }) => {
 };
 
 export default connect(state => ({ recipe: state.recipeReducer.recipe }), {
-	getRecipe
+	getRecipe,
+	destroyRecipe
 })(Recipe);

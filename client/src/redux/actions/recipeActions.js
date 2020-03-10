@@ -1,4 +1,11 @@
-import { GET_CATEGORIES, GET_CATEGORY, GET_RECIPE } from "./types";
+import {
+	GET_CATEGORIES,
+	GET_CATEGORY,
+	GET_RECIPE,
+	ADD_SUCCESS,
+	DESTROY_RECIPE
+} from "./types";
+import { setAlert } from "./alerts";
 import axios from "axios";
 
 export const getCategories = () => async dispatch => {
@@ -27,4 +34,19 @@ export const getRecipe = id => async dispatch => {
 	} catch (error) {
 		console.log(error);
 	}
+};
+
+export const addRecipe = recipe => async dispatch => {
+	try {
+		const res = await axios.post("/recipes", recipe);
+		dispatch({ type: ADD_SUCCESS, payload: res.data });
+		dispatch(setAlert("Successfully added", "success"));
+	} catch (error) {
+		console.error(error);
+		dispatch(setAlert("Something went wrong"), "danger");
+	}
+};
+
+export const destroyRecipe = () => dispatch => {
+	dispatch({ type: DESTROY_RECIPE });
 };
