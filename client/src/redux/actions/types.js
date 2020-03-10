@@ -7,3 +7,5 @@ export const LOGOUT_USER = "LOGOUT_USER";
 export const REGISTER_USER = "REGISTER_USER";
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";
+export const GET_FAVOURITE = "GET_FAVOURITE";
+export const IS_FAVOURITE = "IS_FAVOURITE";

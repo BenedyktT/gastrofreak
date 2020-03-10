@@ -24,5 +24,7 @@ export const getRecipe = id => async dispatch => {
 			type: GET_RECIPE,
 			payload: res.data
 		});
-	} catch (error) {}
+	} catch (error) {
+		console.log(error);
+	}
 };

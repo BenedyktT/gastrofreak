@@ -55,5 +55,6 @@ export const loadUser = () => async dispatch => {
 };
 
 export const logout = () => dispatch => {
+	delete axios.defaults.headers.common["x-auth-token"];
 	dispatch({ type: LOGOUT_USER });
 };

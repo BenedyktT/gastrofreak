@@ -3,8 +3,16 @@ import { connect } from "react-redux";
 import { getCategory } from "../../redux/actions/recipeActions";
 import CategoryListItem from "./CategoryListItem";
 import GoBack from "../layouts/GoBack";
+import { getFavourite } from "../../redux/actions/favouriteActions";
 
-const CategoryList = ({ getCategory, meals, match, history }) => {
+const CategoryList = ({
+	getCategory,
+	meals,
+	match,
+	history,
+	favourite,
+	getFavourite
+}) => {
 	const { category } = match.params;
 	useEffect(() => {
 		getCategory(category);
@@ -29,6 +37,13 @@ const CategoryList = ({ getCategory, meals, match, history }) => {
 	);
 };
 
-export default connect(state => ({ meals: state.recipeReducer.meals }), {
-	getCategory
-})(CategoryList);
+export default connect(
+	state => ({
+		meals: state.recipeReducer.meals,
+		favourite: state.favouriteReducer.favourite
+	}),
+	{
+		getCategory,
+		getFavourite
+	}
+)(CategoryList);
