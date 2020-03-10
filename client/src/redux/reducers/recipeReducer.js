@@ -1,4 +1,10 @@
-import { GET_CATEGORIES, GET_CATEGORY, GET_RECIPE } from "../actions/types";
+import {
+	GET_CATEGORIES,
+	GET_CATEGORY,
+	GET_RECIPE,
+	ADD_SUCCESS,
+	DESTROY_RECIPE
+} from "../actions/types";
 const initialState = {
 	categories: [],
 	meals: []
@@ -12,7 +18,10 @@ export default (state = initialState, { type, payload }) => {
 			return { ...state, meals: [...payload] };
 		case GET_RECIPE:
 			return { ...state, recipe: payload };
-
+		case ADD_SUCCESS:
+			return { ...state, recipe: payload };
+		case DESTROY_RECIPE:
+			return { ...state, recipe: "" };
 		default:
 			return state;
 	}

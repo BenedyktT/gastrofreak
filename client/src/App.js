@@ -33,10 +33,10 @@ function App() {
 					<Route exact path="/login" component={Login} />
 					<Alert />
 					<Switch>
-						<Route exact path="/" component={Dashboard} />
-						<Route exact path="/search" component={Search} />
+						<Route exact path="/" component={Search} />
 						<Route exact path="/category/:category" component={CategoryList} />
 						<Route exact path="/meal/:id" component={Recipe} />
+						<PrivateRoute exact path="/myrecipe" component={Recipe} />
 						<PrivateRoute exact path="/account" component={Account} />
 						<PrivateRoute exact path="/add" component={Add} />
 						<PrivateRoute exact path="/favourite" component={Favourite} />

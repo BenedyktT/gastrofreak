@@ -1,0 +1,35 @@
+.add-container{
+    width:100%;
+    margin:auto
+}
+.add-recipe{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:1rem;
+    margin:auto;
+    justify-items: center;
+}
+.form__element--textarea{
+   textarea{height: 200px;width:100%} 
+}
+.form__element{
+    width: 85%;
+    display:grid;
+    grid-template-columns: 10% 1fr;
+    overflow: hidden;
+    justify-items: center;
+    align-items: center;
+    label{
+        visibility: hidden;
+        @include respond-to(wide-screens){
+            visibility: visible;
+        }
+    }
+}
+.form__element--submit{
+
+    input{
+        padding:1rem 3rem;
+        
+    }
+}

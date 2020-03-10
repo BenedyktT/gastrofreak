@@ -1,6 +1,11 @@
-import express from "express";
+import express, { response } from "express";
 import axios from "axios";
 import getMeal from "./helper/getMeal";
+import auth from "./helper/auth";
+import { check, validationResult } from "express-validator";
+import Recipe from "../models/Recipe";
+import User from "../models/User";
+import getNutritionValues from "./helper/getNutritionValues";
 
 const router = express.Router();
 
@@ -33,73 +38,48 @@ router.get("/:id", async (req, res) => {
 	const data = await getMeal("i", req.params.id, 4);
 
 	try {
-		const response = await axios.post(
-			`https://api.edamam.com/api/nutrition-details?app_id=${process.env.APPLICATION_ID}&app_key=${process.env.APPLICATION_KEY}`,
-			data[0],
-			{ headers: { ContentType: "application/json" } }
-		);
-		const {
-			calories,
-			totalWeight,
-			dietLabels,
-			healthLabels,
-			cautions,
-			totalNutrients,
-			totalDaily
-		} = response.data;
-		const nutrients = [
-			...Object.values(totalNutrients),
-			...Object.values(totalDaily)
-		]
-			.reduce((acc, curr) => {
-				const x = acc.find(e => e.label === curr.label);
-				if (!x) {
-					return (acc = [...acc, curr]);
-				}
-				const toMerge = {
-					amount: parseInt(x.quantity),
-					amountUnit: x.unit
-				};
-				acc = acc.filter(e => e !== x);
-				return (acc = [...acc, { ...curr, ...toMerge }]);
-			}, [])
-			.reduce((acc, curr) => {
-				if (curr.amount) {
-					return {
-						...acc,
-						[curr.label]: {
-							quantity: curr.quantity,
-							unit: curr.unit,
-							amount: curr.amount,
-							amountUnit: curr.amountUnit
-						}
-					};
-				}
-				return {
-					...acc,
-					[curr.label]: {
-						quantity: curr.quantity,
-						unit: curr.unit
-					}
-				};
-			}, {});
-		const nutritionReport = {
-			prep: data[0].prep,
-			title: data[0].title,
-			ingr: data[0].ingr,
-			calories,
-			totalWeight,
-			dietLabels,
-			healthLabels,
-			cautions,
-			nutrients
-		};
-		return res.json(nutritionReport);
+		const recipe = await getNutritionValues(data);
+		return res.json(recipe);
 	} catch (error) {
 		console.error(error);
 		res.status(500).json(error);
 	}
 });
+
+router.post(
+	"/",
+	auth,
+	[
+		check("title", "Title is Required")
+			.not()
+			.isEmpty(),
+		check("prep", "Preparation steps are required")
+			.not()
+			.isEmpty(),
+		check("ingr", "Please provide coma separated ingredienties").isLength({
+			min: 2
+		})
+	],
+	async (req, res) => {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return res.status(400).json({ errors: errors.array() });
+		}
+		try {
+			const newRecipe = new Recipe({
+				...req.body,
+				user: req.user
+			});
+			const recipe = await getNutritionValues([req.body]);
+			await newRecipe.save();
+			return res.json(recipe);
+		} catch (error) {
+			console.error(error);
+
+			res.status(500).json(error.message);
+		}
+	}
+);
 
 export default router;
 
