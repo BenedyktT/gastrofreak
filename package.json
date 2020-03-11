@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "start": "node -r esm server.js",
-    "server": "nodemon -r esm server.js --ignore './client/'",
+    "start": "node main.js",
+    "server": "nodemon main.js --ignore './client/'",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
