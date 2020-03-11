@@ -1,9 +1,9 @@
-const express = require("express");
-const getMeal = require("./helper/getMeal");
-const auth = require("./helper/auth");
-const { check, validationResult } = require("express-validator");
-const getNutritionValues = require("./helper/getNutritionValues");
-const UserRecipe = require("../models/UserRecipe");
+import express from "express";
+import getMeal from "./helper/getMeal";
+import auth from "./helper/auth";
+import { check, validationResult } from "express-validator";
+import getNutritionValues from "./helper/getNutritionValues";
+import UserRecipe from "../models/UserRecipe";
 
 const router = express.Router();
 
@@ -78,6 +78,7 @@ router.post(
 	}
 );
 
-module.exports = router;
+export default router;
+
 /*
  */

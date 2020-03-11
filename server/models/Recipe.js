@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-let useRecipeSchema = new mongoose.Schema({
+let RecipeSchema = new mongoose.Schema({
 	user: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "user"
@@ -14,7 +14,10 @@ let useRecipeSchema = new mongoose.Schema({
 	date: {
 		type: Date,
 		default: Date.now()
+	},
+	recipeId: {
+		type: Number
 	}
 });
 
-module.exports = mongoose.model("useRecipe", useRecipeSchema);
+export default RecipeSchema = mongoose.model("recipe", RecipeSchema);

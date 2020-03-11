@@ -1,9 +1,9 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const User = require("../models/User");
-const jwt = require("jsonwebtoken");
-const { check, validationResult } = require("express-validator");
-const bcrypt = require("bcryptjs");
+import User from "../models/User";
+import jwt from "jsonwebtoken";
+import { check, validationResult } from "express-validator";
+import bcrypt from "bcryptjs";
 
 //@public
 //@register new user
@@ -71,4 +71,4 @@ router.post(
 	}
 );
 
-module.exports = router;
+export default router;

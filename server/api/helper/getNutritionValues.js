@@ -1,5 +1,5 @@
-const axios = require("axios");
-module.exports = async data => {
+import axios from "axios";
+export default async data => {
 	console.log(data[0]);
 	const response = await axios.post(
 		`https://api.edamam.com/api/nutrition-details?app_id=${process.env.APPLICATION_ID}&app_key=${process.env.APPLICATION_KEY}`,

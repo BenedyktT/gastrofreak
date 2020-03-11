@@ -1,9 +1,9 @@
-const express = require("express");
-const axios = require("axios");
-const auth = require("./helper/auth");
-const Recipe = require("../models/Recipe");
-const User = require("../models/User");
-const getMeal = require("./helper/getMeal");
+import express from "express";
+import axios from "axios";
+import auth from "./helper/auth";
+import Recipe from "../models/Recipe";
+import User from "../models/User";
+import getMeal from "./helper/getMeal";
 const router = express.Router();
 //@private
 //get list of favourite
@@ -62,4 +62,4 @@ router.post("/:id", auth, async (req, res) => {
 		res.status(500).json("error");
 	}
 });
-module.exports = router;
+export default router;
