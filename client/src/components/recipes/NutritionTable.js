@@ -1,7 +1,7 @@
 import React from "react";
 
 const NutritionTable = ({ nutrients, portion, totalWeight }) => {
-	const {
+	let {
 		Fat,
 		Saturated,
 		Monounsaturated,
@@ -12,8 +12,18 @@ const NutritionTable = ({ nutrients, portion, totalWeight }) => {
 		Protein,
 		Sugars
 	} = nutrients;
+	if (!Fat) Fat = 0;
+	if (!Saturated) Saturated = 0;
+	if (!Monounsaturated) Monounsaturated = 0;
+	if (!Carbs) Carbs = 0;
+	if (!Fiber) Fiber = 0;
+	if (!Water) Water = 0;
+	if (!Protein) Protein = 0;
+	if (!Sugars) Sugars = 0;
 	const calculatePortion = nutrient => {
-		return parseInt((portion * nutrient) / totalWeight);
+		return nutrient
+			? Math.floor(parseInt((portion * nutrient) / totalWeight))
+			: 0;
 	};
 	return (
 		<table className="tg">
@@ -30,7 +40,7 @@ const NutritionTable = ({ nutrients, portion, totalWeight }) => {
 						<span style={{ fontWeight: "bold" }}>Fat</span>
 					</td>
 					<td className="tg-ofj5" style={{ fontWeight: "bold" }}>
-						{calculatePortion(Fat.amount)}
+						{Fat ? calculatePortion(Fat.amount) : 0}
 					</td>
 					<td className="tg-ofj5" style={{ fontWeight: "bold" }}>
 						{calculatePortion(parseInt(Fat.quantity))}
@@ -71,7 +81,7 @@ const NutritionTable = ({ nutrients, portion, totalWeight }) => {
 				<tr>
 					<td className="tg-owf9">Sugars</td>
 					<td className="tg-ofj5">
-						{calculatePortion(parseInt(Sugars.quantity))}
+						{Sugars ? calculatePortion(parseInt(Sugars.quantity)) : 0}
 					</td>
 					<td className="tg-ofj5"></td>
 				</tr>
