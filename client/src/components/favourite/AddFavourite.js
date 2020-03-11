@@ -26,10 +26,9 @@ const AddFavourite = ({
 		}
 	};
 	const removeFavourite = async id => {
-		console.log(idType);
 		try {
 			if (idType === "_id") {
-				await axios.delete(`/recipes/${id}`);
+				await axios.delete(`/userrecipes/${id}`);
 				getMyRecipes();
 				setAlert("Successfully deleted from my Recipes", "success");
 			}
