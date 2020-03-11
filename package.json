@@ -2,7 +2,7 @@
   "name": "gastrofreak",
   "version": "1.0.0",
   "description": "Application aims to help track of nutrition values of favourite recipes\"",
-  "main": "server.js",
+  "main": "main.js",
   "scripts": {
     "test": "jest",
     "start": "node main.js",
