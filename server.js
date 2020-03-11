@@ -19,11 +19,9 @@ app.use("/categories", categories);
 app.use("/recipes", recipes);
 app.use("/favourite", favourite);
 app.use("/userRecipes", userRecipes);
-app.get("/", (req, res) => {
-	app.use(express.static("client/build"));
-	app.get("*", function(req, res) {
-		res.sendFile(path.join(__dirname, "build", "index.html"));
-	});
+app.use(express.static("client/build"));
+app.get("*", (req, res) => {
+	res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 app.listen(PORT, (req, res) => {
