@@ -1,10 +1,10 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const auth = require("./helper/auth");
-const User = require("../models/User");
-const jwt = require("jsonwebtoken");
-const { check, validationResult } = require("express-validator");
-const bcrypt = require("bcryptjs");
+import auth from "./helper/auth";
+import User from "../models/User";
+import jwt from "jsonwebtoken";
+import { check, validationResult } from "express-validator";
+import bcrypt from "bcryptjs";
 
 // @route GET api/auth
 // @desc
@@ -72,4 +72,4 @@ router.post(
 	}
 );
 
-module.exports = router;
+export default router;

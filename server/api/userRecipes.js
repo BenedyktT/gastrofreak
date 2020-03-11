@@ -1,7 +1,7 @@
-const auth = require("./helper/auth");
-const getNutritionValues = require("./helper/getNutritionValues");
-const UserRecipe = require("../models/UserRecipe");
-const express = require("express");
+import auth from "./helper/auth";
+import getNutritionValues from "./helper/getNutritionValues";
+import UserRecipe from "../models/UserRecipe";
+import express from "express";
 const router = express.Router();
 router.delete("/:id", auth, async (req, res) => {
 	const { id } = req.params;
@@ -49,4 +49,4 @@ router.get("/:id", async (req, res) => {
 	}
 });
 
-module.exports = router;
+export default router;

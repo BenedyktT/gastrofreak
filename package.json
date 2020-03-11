@@ -2,16 +2,14 @@
   "name": "gastrofreak",
   "version": "1.0.0",
   "description": "Application aims to help track of nutrition values of favourite recipes\"",
-  "main": "main.js",
+  "main": "server.js",
   "scripts": {
     "test": "jest",
-    "start": "node main.js",
-    "server": "nodemon main.js --ignore './client/'",
+    "start": "node server.js",
+    "server": "nodemon server.js --ignore './client/'",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install&& npm install --prefix client && npm run build --prefix client",
-    "clean": "rm -rf build && mkdir build",
-    "build-babel": "babel -d ./build ./ -s --ignore `./client`"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false  npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",

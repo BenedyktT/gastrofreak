@@ -1,13 +1,13 @@
-const dotenv = require("dotenv");
+import dotenv from "dotenv";
 dotenv.config();
-const express = require("express");
-const recipes = require("./api/recipes");
-const connectDB = require("./config/config");
-const categories = require("./api/categories");
-const user = require("./api/user");
-const auth = require("./api/auth");
-const favourite = require("./api/favourite");
-const userRecipes = require("./api/userRecipes");
+import express from "express";
+import recipes from "./api/recipes";
+import connectDB from "./config/config";
+import categories from "./api/categories";
+import user from "./api/user";
+import auth from "./api/auth";
+import favourite from "./api/favourite";
+import userRecipes from "./api/userRecipes";
 
 const app = express();
 connectDB();

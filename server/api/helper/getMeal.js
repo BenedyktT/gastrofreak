@@ -1,5 +1,5 @@
-const axios = require("axios");
-module.exports = async (queryType, item, serving = 1) => {
+import axios from "axios";
+export default async (queryType, item, serving = 1) => {
 	try {
 		const type = queryType === "s" ? "search" : "lookup";
 		const response = await axios.get(
