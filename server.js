@@ -20,16 +20,11 @@ app.use("/recipes", recipes);
 app.use("/favourite", favourite);
 app.use("/userRecipes", userRecipes);
 app.get("/", (req, res) => {
-	return res.send("Hello world");
-});
-
-if (process.env.NODE_ENV === "production") {
-	// Set static folder
 	app.use(express.static("client/build"));
 	app.get("*", function(req, res) {
 		res.sendFile(path.join(__dirname, "build", "index.html"));
 	});
-}
+});
 
 app.listen(PORT, (req, res) => {
 	console.log(`server is working on port ${PORT}`);
