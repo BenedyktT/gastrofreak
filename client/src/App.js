@@ -12,11 +12,10 @@ import Login from "./components/login/Login";
 import setAuthToken from "./setAuthToken";
 import Alert from "./components/alerts/Alert";
 import PrivateRoute from "./components/auth/PrivateRoute";
-import Account from "./components/auth/Account";
+import MyRecipes from "./components/myRecipes/MyRecipes";
 import Add from "./components/addRecipe/Add";
 import Favourite from "./components/favourite/Favourite";
 import { loadUser } from "./redux/actions/authActions";
-import Dashboard from "./components/dashboard/Dashboard";
 
 if (localStorage.getItem("token")) {
 	setAuthToken(localStorage.getItem("token"));
@@ -37,7 +36,8 @@ function App() {
 						<Route exact path="/category/:category" component={CategoryList} />
 						<Route exact path="/meal/:id" component={Recipe} />
 						<PrivateRoute exact path="/myrecipe" component={Recipe} />
-						<PrivateRoute exact path="/account" component={Account} />
+						<PrivateRoute exact path="/myRecipe/:id" component={Recipe} />
+						<PrivateRoute exact path="/myRecipes" component={MyRecipes} />
 						<PrivateRoute exact path="/add" component={Add} />
 						<PrivateRoute exact path="/favourite" component={Favourite} />
 					</Switch>

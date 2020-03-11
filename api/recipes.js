@@ -1,11 +1,9 @@
-import express, { response } from "express";
-import axios from "axios";
+import express from "express";
 import getMeal from "./helper/getMeal";
 import auth from "./helper/auth";
 import { check, validationResult } from "express-validator";
-import Recipe from "../models/Recipe";
-import User from "../models/User";
 import getNutritionValues from "./helper/getNutritionValues";
+import UserRecipe from "../models/UserRecipe";
 
 const router = express.Router();
 
@@ -66,7 +64,7 @@ router.post(
 			return res.status(400).json({ errors: errors.array() });
 		}
 		try {
-			const newRecipe = new Recipe({
+			const newRecipe = new UserRecipe({
 				...req.body,
 				user: req.user
 			});
@@ -75,7 +73,6 @@ router.post(
 			return res.json(recipe);
 		} catch (error) {
 			console.error(error);
-
 			res.status(500).json(error.message);
 		}
 	}

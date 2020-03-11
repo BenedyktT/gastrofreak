@@ -1,14 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import NutritionTable from "./NutritionTable";
-import { getRecipe, destroyRecipe } from "../../redux/actions/recipeActions";
+import {
+	getRecipe,
+	destroyRecipe,
+	getUserRecipe
+} from "../../redux/actions/recipeActions";
 import GoBack from "../layouts/GoBack";
-const Recipe = ({ getRecipe, recipe, match, history, destroyRecipe }) => {
+
+const Recipe = ({
+	getRecipe,
+	recipe,
+	match,
+	history,
+	destroyRecipe,
+	getUserRecipe
+}) => {
 	useEffect(() => {}, []);
 	useEffect(() => {
 		const isExternalRecipe = history.location.pathname.includes("meal");
 		if (isExternalRecipe) {
 			getRecipe(match.params.id);
+		} else {
+			getUserRecipe(match.params.id);
 		}
 		return () => {
 			destroyRecipe();
@@ -77,7 +91,13 @@ const Recipe = ({ getRecipe, recipe, match, history, destroyRecipe }) => {
 	return recipe ? render() : <div className="">Loading...</div>;
 };
 
-export default connect(state => ({ recipe: state.recipeReducer.recipe }), {
-	getRecipe,
-	destroyRecipe
-})(Recipe);
+export default connect(
+	state => ({
+		recipe: state.recipeReducer.recipe
+	}),
+	{
+		getRecipe,
+		destroyRecipe,
+		getUserRecipe
+	}
+)(Recipe);
