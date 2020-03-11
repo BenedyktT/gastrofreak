@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { addRecipe } from "../../redux/actions/recipeActions";
-import { Redirect } from "react-router-dom";
-const Add = ({ addRecipe, recipe, history, id }) => {
+
+const Add = ({ addRecipe, recipe, history }) => {
 	const [value, setValue] = useState({ title: "", prep: "", ingr: "" });
 	const { title, prep, ingr } = value;
 	const onChange = e => {
@@ -22,7 +22,7 @@ const Add = ({ addRecipe, recipe, history, id }) => {
 	};
 	useEffect(() => {
 		if (recipe) {
-			history.push(`/myrecipe/${id}`);
+			history.push(`/myrecipe/`);
 		}
 	}, [recipe]);
 	return (
@@ -73,8 +73,7 @@ const Add = ({ addRecipe, recipe, history, id }) => {
 
 export default connect(
 	state => ({
-		recipe: state.recipeReducer.recipe,
-		id: state.favouriteReducer.myRecipes[0]._id
+		recipe: state.recipeReducer.recipe
 	}),
 	{
 		addRecipe
