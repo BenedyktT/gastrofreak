@@ -1,8 +1,9 @@
-import { GET_FAVOURITE } from "../actions/types";
+import { GET_FAVOURITE, GET_USER_RECIPES } from "../actions/types";
 
 const initialState = {
 	favourite: [],
-	loading: true
+	loading: true,
+	myRecipes: []
 };
 
 export default (state = initialState, action) => {
@@ -10,7 +11,8 @@ export default (state = initialState, action) => {
 	switch (type) {
 		case GET_FAVOURITE:
 			return { ...state, favourite: payload, loading: false };
-
+		case GET_USER_RECIPES:
+			return { ...state, myRecipes: payload, loading: false };
 		default:
 			return state;
 	}

@@ -8,8 +8,8 @@ const CategoryListItem = ({
 	thumb,
 	title,
 	id,
-	favourite,
-	getFavourite,
+	idType,
+	mealsList,
 	loading,
 	isAuthenticated
 }) => {
@@ -17,13 +17,12 @@ const CategoryListItem = ({
 	let thumbSource = null;
 	useEffect(() => {
 		if (!loading) {
-			const find = favourite.find(e => e.recipeId === parseInt(id))
+			const find = mealsList.find(e => parseInt(e[idType]) === parseInt(id))
 				? true
 				: false;
-
 			setisFavourite(find);
 		}
-	}, [loading, favourite]);
+	}, [loading, mealsList]);
 	if (thumb) {
 		{
 			thumbSource = { backgroundImage: `url(${thumb})` };
@@ -31,19 +30,23 @@ const CategoryListItem = ({
 	}
 	return (
 		<li className="item-container">
-			<Link className="category__item" to={`/meal/${id}`}>
+			<Link
+				className="category__item"
+				to={idType === "recipeId" ? `/meal/${id}` : `/myRecipe/${id}`}
+			>
 				<div className="category__item-bg" style={thumbSource}></div>
 				<div className="category__item-overlay"></div>
 				<h3 className="category__item-title">{title}</h3>
 			</Link>
-			{isAuthenticated && <AddFavourite id={id} isFavourite={isFavourite} />}
+			{isAuthenticated && (
+				<AddFavourite idType={idType} id={id} isFavourite={isFavourite} />
+			)}
 		</li>
 	);
 };
 
 export default connect(
 	state => ({
-		favourite: state.favouriteReducer.favourite,
 		loading: state.favouriteReducer.loading,
 		isAuthenticated: state.authReducer.isAuthenticated
 	}),

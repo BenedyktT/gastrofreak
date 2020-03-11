@@ -16,6 +16,7 @@ const CategoryList = ({
 	const { category } = match.params;
 	useEffect(() => {
 		getCategory(category);
+		getFavourite();
 	}, []);
 
 	return (
@@ -30,6 +31,8 @@ const CategoryList = ({
 							thumb={strMealThumb}
 							title={strMeal}
 							id={idMeal}
+							idType={"recipeId"}
+							mealsList={favourite}
 						/>
 					))}
 			</ul>

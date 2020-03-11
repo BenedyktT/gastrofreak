@@ -2,14 +2,18 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import { setAlert } from "../../redux/actions/alerts";
-import { getFavourite } from "../../redux/actions/favouriteActions";
+import {
+	getFavourite,
+	getMyRecipes
+} from "../../redux/actions/favouriteActions";
 
 const AddFavourite = ({
 	id,
 	isFavourite,
-	favourite,
+	idType,
 	setAlert,
-	getFavourite
+	getFavourite,
+	getMyRecipes
 }) => {
 	const addFavourite = async id => {
 		try {
@@ -22,12 +26,21 @@ const AddFavourite = ({
 		}
 	};
 	const removeFavourite = async id => {
+		console.log(idType);
 		try {
-			await axios.delete(`/favourite/${id}`);
-			getFavourite();
-			setAlert("Successfully deleted from favourites", "success");
+			if (idType === "_id") {
+				await axios.delete(`/recipes/${id}`);
+				getMyRecipes();
+				setAlert("Successfully deleted from my Recipes", "success");
+			}
+			if (idType === "recipeId") {
+				await axios.delete(`/favourite/${id}`);
+				getFavourite();
+				setAlert("Successfully deleted from favourites", "success");
+				return;
+			}
 		} catch (error) {
-			setAlert("Couldn't add to favourite, please try refresh page");
+			setAlert("Couldn't delete, please try refresh page");
 		}
 	};
 
@@ -46,5 +59,5 @@ export default connect(
 	state => ({
 		favourite: state.favouriteReducer.favourite
 	}),
-	{ setAlert, getFavourite }
+	{ setAlert, getFavourite, getMyRecipes }
 )(AddFavourite);

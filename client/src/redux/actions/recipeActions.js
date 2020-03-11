@@ -35,6 +35,17 @@ export const getRecipe = id => async dispatch => {
 		console.log(error);
 	}
 };
+export const getUserRecipe = id => async dispatch => {
+	try {
+		const res = await axios.get(`/userRecipes/${id}`);
+		dispatch({
+			type: GET_RECIPE,
+			payload: res.data
+		});
+	} catch (error) {
+		console.log(error);
+	}
+};
 
 export const addRecipe = recipe => async dispatch => {
 	try {

@@ -3,26 +3,28 @@ import { connect } from "react-redux";
 /* import { getCategory } from "../../redux/actions/recipeActions"; */
 /* import CategoryListItem from "./CategoryListItem"; */
 import GoBack from "../layouts/GoBack";
-import { getFavourite } from "../../redux/actions/favouriteActions";
-import FavouriteListItem from "../search/CategoryListItem";
 
-const FavouriteList = ({ history, getFavourite, favourite }) => {
+import CategoryListItem from "../search/CategoryListItem";
+
+const FavouriteList = ({ history, getRecipeList, recipes, idType }) => {
 	useEffect(() => {
-		getFavourite();
+		getRecipeList();
 	}, []);
 	return (
 		<div className="category-wrapper">
 			<GoBack history={history} />
 			<ul className="meals__grid">
-				{favourite.length &&
-					favourite.map(({ title, titleThumb, recipeId }) => (
-						<FavouriteListItem
-							key={recipeId}
+				{recipes.length &&
+					recipes.map(({ title, titleThumb, recipeId, _id }) => (
+						<CategoryListItem
+							key={_id}
 							className="categories_item"
 							thumb={titleThumb}
 							title={title}
-							id={recipeId}
-							isFavourite={true}
+							id={recipeId ? recipeId : _id}
+							idType={idType}
+							recipeId={recipeId}
+							mealsList={recipes}
 						/>
 					))}
 			</ul>
@@ -30,7 +32,6 @@ const FavouriteList = ({ history, getFavourite, favourite }) => {
 	);
 };
 
-export default connect(
-	state => ({ favourite: state.favouriteReducer.favourite }),
-	{ getFavourite }
-)(FavouriteList);
+export default connect(state => ({
+	favourite: state.favouriteReducer.favourite
+}))(FavouriteList);

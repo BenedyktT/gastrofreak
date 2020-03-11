@@ -16,7 +16,7 @@ const FooterNav = ({ history }) => {
 	};
 	const trackPath = path => {
 		if (path === "/") return setElementActive({ search: true });
-		if (path.includes("account")) return setElementActive({ account: true });
+		if (path.includes("myRecipes")) return setElementActive({ account: true });
 		if (path.includes("favourite"))
 			return setElementActive({ favourite: true });
 		if (path.includes("add")) return setElementActive({ add: true });
@@ -28,22 +28,6 @@ const FooterNav = ({ history }) => {
 	}, [pathname]);
 	return (
 		<nav className="footernav">
-			<div className="footernav__elements">
-				<Link to="/account" onClick={activate} name="account">
-					<Account
-						className={classnames("footernav__element", {
-							active: elementActive.account
-						})}
-					/>
-				</Link>
-				<span
-					className={classnames("footernav__text", {
-						active: elementActive.account
-					})}
-				>
-					Account
-				</span>
-			</div>
 			<div className="footernav__elements">
 				<Link to="/" onClick={activate} name="search">
 					<Search
@@ -74,6 +58,22 @@ const FooterNav = ({ history }) => {
 					})}
 				>
 					Favourite
+				</span>
+			</div>
+			<div className="footernav__elements">
+				<Link to="/myRecipes" onClick={activate} name="account">
+					<Account
+						className={classnames("footernav__element", {
+							active: elementActive.account
+						})}
+					/>
+				</Link>
+				<span
+					className={classnames("footernav__text", {
+						active: elementActive.account
+					})}
+				>
+					My Recipes
 				</span>
 			</div>
 			<div className="footernav__elements">
