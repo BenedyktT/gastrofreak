@@ -1,6 +1,6 @@
-$blue-light: #26b7cb;
-$blue-dark: #185e68;
-$blue-a: #1ecbf4;
+$blue-light: #b5446e;
+$blue-dark: rgb(235, 92, 144);
+$blue-a: #0affed;
 $blue-b: #194dc3;
 $blue-primary: #1592e6;
 $occupied: #6200ee;
@@ -11,7 +11,7 @@ $green-b: #2a8b4e;
 $success: #2a8b4e;
 $danger: rgb(141, 55, 55);
 $white: #f3f3f3;
-$black: #303c42;
+$black: #525252;
 
 $gradient-blue: linear-gradient($blue-light, $blue-dark);
 $gradient-blue-alternative: linear-gradient($blue-a, $blue-b);

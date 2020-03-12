@@ -22,7 +22,9 @@ const Header = ({ isAuthenticated, user, logout }) => {
             </Link>
           </div>
         ) : (
-          <Link to="/login">Login/SignUp</Link>
+          <Link className="login__btn" to="/login">
+            Login/SignUp
+          </Link>
         )}
       </div>
     </div>

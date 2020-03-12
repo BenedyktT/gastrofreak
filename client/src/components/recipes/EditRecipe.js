@@ -66,30 +66,8 @@ const EditRecipe = ({
         <GoBack history={history} />
 
         <div className="recipe__title">
-          {!isEditMode.title && (
-            <button onClick={() => setEditMode({ ...isEditMode, title: true })}>
-              Edit
-            </button>
-          )}
-          {isEditMode.title && !isFinishEditing.title ? (
-            <Fragment>
-              <input
-                className="edit-input title-edit"
-                name="title"
-                value={recipeValue.title}
-                onChange={onChange}
-              ></input>
-              {
-                <input
-                  type="submit"
-                  name="edit_title"
-                  onClick={submitChanges}
-                  value="submit changes"
-                />
-              }
-            </Fragment>
-          ) : (
-            <div className="recipe__title">{recipeValue.title}</div>
+          {!isEditMode.title && <button>Edit</button>}(
+          <div className="recipe__title">{recipeValue.title}</div>
           )}
         </div>
         <div className="recipe__health-labels">

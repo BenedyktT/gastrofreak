@@ -1,41 +1,41 @@
-.container{
-    padding:$padding;
-    text-align:center;
-    min-height: 500px;
-    input{
-        padding:0.3rem;
-        border-radius:5px
-    }
-}
-
-.login-container{
-    display:grid;
-    grid-template-columns: 1fr;
-    @include respond-to(wide-screens){
-        grid-template-columns: 1fr 1fr;
-    }
-   
-}
-.form{
-   
-}
-.form__element{
-    margin:0.2rem;
-    padding:0.5rem;
+.container {
+  padding: $padding;
+  text-align: center;
+  min-height: 500px;
+  input {
+    padding: 0.3rem;
     border-radius: 5px;
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    justify-items: center;
-
+  }
 }
-.submit{
-    input{
-        padding:0.8rem;
-        border-radius: 5px;
-        width:100px;
-        background-color: $blue-dark;
-        color:white
-    }
-   
+
+.login-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  @include respond-to(wide-screens) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.form {
+}
+.form__element {
+  margin: 0.2rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+}
+.submit {
+  input {
+    padding: 0.8rem;
+    border-radius: 5px;
+    width: 100px;
+    background-color: $blue-dark;
+    color: white;
+  }
+}
+.login__btn {
+  color: white;
+  font-weight: 700;
 }

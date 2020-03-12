@@ -10,6 +10,7 @@ import GoBack from "../layouts/GoBack";
 import { Link } from "react-router-dom";
 import moduleName from "module";
 import Loader from "../layouts/Loader";
+import { ReactComponent as Edit } from "../../assets/edit.svg";
 
 const Recipe = ({
   getRecipe,
@@ -46,8 +47,9 @@ const Recipe = ({
     return (
       <div className="recipe">
         <GoBack history={history} />
-        <Link to={`/edit/${match.params.id}`}>Edit</Link>
-        <div className="recipe__title">{title}</div>
+        <div className=" recipe__element recipe__title">
+          <h1>{title}</h1> <Edit className="edit-svg" />
+        </div>
         <div className="recipe__health-labels">
           <h3>Health labels:</h3>
           <p className="recipe__health-labels-elements">
@@ -76,11 +78,12 @@ const Recipe = ({
             totalWeight={totalWeight}
           />
         </div>
-        <div className="recipe__prep">
+        <div className="recipe__element recipe__prep">
           <h3>Prep:</h3>
           <p>{prep}</p>
+          <Edit className="edit-svg" />
         </div>
-        <div className="recipe__ingredients">
+        <div className="recipe__element recipe__ingredients">
           <ul className="ingredient__elements">
             {ingr.map(e => (
               <li key={Math.random()} className="ingredient__element">
@@ -88,6 +91,7 @@ const Recipe = ({
               </li>
             ))}
           </ul>
+          <Edit className="edit-svg" />
         </div>
       </div>
     );
