@@ -7,7 +7,6 @@ import {
 	getUserRecipe
 } from "../../redux/actions/recipeActions";
 import GoBack from "../layouts/GoBack";
-import { Link } from "react-router-dom";
 
 const Recipe = ({
 	getRecipe,
@@ -25,7 +24,9 @@ const Recipe = ({
 		} else {
 			getUserRecipe(match.params.id);
 		}
-		return () => {};
+		return () => {
+			destroyRecipe();
+		};
 	}, []);
 	const [portion, setPortion] = useState(300);
 	const render = () => {
@@ -42,7 +43,6 @@ const Recipe = ({
 		return (
 			<div className="recipe">
 				<GoBack history={history} />
-				<Link to={`/edit/${match.params.id}`}>Edit</Link>
 				<div className="recipe__title">{title}</div>
 				<div className="recipe__health-labels">
 					<h3>Health labels:</h3>
@@ -60,7 +60,6 @@ const Recipe = ({
 							value={portion}
 							onChange={e => setPortion(e.target.value)}
 						/>
-						g
 					</span>
 					<span>Total weight: {parseInt(totalWeight)}g</span>
 					<span>Kcal: {calories}</span>
@@ -74,7 +73,14 @@ const Recipe = ({
 				</div>
 				<div className="recipe__prep">
 					<h3>Prep:</h3>
-					<p>{prep}</p>
+
+					<textarea
+						name="prep"
+						id=""
+						cols="30"
+						rows="10"
+						placeholder="Preparation steps"
+					/>
 				</div>
 				<div className="recipe__ingredients">
 					<ul className="ingredient__elements">

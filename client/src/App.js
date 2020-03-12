@@ -16,6 +16,7 @@ import MyRecipes from "./components/myRecipes/MyRecipes";
 import Add from "./components/addRecipe/Add";
 import Favourite from "./components/favourite/Favourite";
 import { loadUser } from "./redux/actions/authActions";
+import EditRecipe from "./components/recipes/EditRecipe";
 
 if (localStorage.getItem("token")) {
 	setAuthToken(localStorage.getItem("token"));
@@ -35,6 +36,7 @@ function App() {
 						<Route exact path="/" component={Search} />
 						<Route exact path="/category/:category" component={CategoryList} />
 						<Route exact path="/meal/:id" component={Recipe} />
+						<PrivateRoute exact path="/edit/:id" component={EditRecipe} />
 						<PrivateRoute exact path="/myrecipe" component={Recipe} />
 						<PrivateRoute exact path="/myRecipe/:id" component={Recipe} />
 						<PrivateRoute exact path="/myRecipes" component={MyRecipes} />
