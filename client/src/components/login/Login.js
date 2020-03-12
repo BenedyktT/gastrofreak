@@ -49,6 +49,7 @@ const Login = ({
                 type="email"
                 value={email}
                 onChange={onChange}
+                placeholder="Email"
               />
             </div>
             <div className="form__element">
@@ -58,6 +59,7 @@ const Login = ({
                 type="password"
                 value={password}
                 onChange={onChange}
+                placeholder="Password"
               />
             </div>
             <div className="submit">
