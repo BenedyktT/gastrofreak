@@ -7,7 +7,8 @@ import {
 } from "../actions/types";
 const initialState = {
 	categories: [],
-	meals: []
+	meals: [],
+	recipe: ""
 };
 export default (state = initialState, { type, payload }) => {
 	switch (type) {

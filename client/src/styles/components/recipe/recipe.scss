@@ -64,6 +64,22 @@
   width: 60%;
   color:$white
 }
+.edit-input{
+  background:transparent;
+  border:none;
+  width:100%;
+  color:white;
+}
+.prep-edit{
+  min-height: 150px;
+}
+textarea:focus,input:focus{
+  box-shadow:none;
+  outline:inherit !important;
+  border:none;
+ 
+  
+}
 .recipe__health-labels,
 .recipe__prep {
   h3 {
