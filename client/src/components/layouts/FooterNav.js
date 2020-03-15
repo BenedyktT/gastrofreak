@@ -15,7 +15,8 @@ const FooterNav = ({ history }) => {
 		setElementActive({ [e.target.name]: true });
 	};
 	const trackPath = path => {
-		if (path === "/") return setElementActive({ search: true });
+		if (path === "/") return setElementActive({});
+		if (path.includes("/search")) return setElementActive({ search: true });
 		if (path.includes("myRecipes")) return setElementActive({ account: true });
 		if (path.includes("favourite"))
 			return setElementActive({ favourite: true });

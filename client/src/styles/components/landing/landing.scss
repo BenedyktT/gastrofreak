@@ -1,0 +1,35 @@
+.landing-container{
+    
+    width:100%;
+    margin:auto;
+    height: 100%;
+    padding:$padding;
+    text-align: center;
+
+}
+.landing-wrapper{
+    display:grid;
+    grid-template-columns: 1fr;
+    width:85%;
+    margin:auto;
+    align-items: center;
+    @include respond-to(wide-screens){
+        grid-template-columns: 1fr 1fr;
+    }
+}
+.cta{   display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 1rem;
+    padding:$padding;
+    margin:1rem;
+    background: $blue-primary;
+    color:white;
+    img{
+        width:100px;height: 100px;
+     
+    }
+}
+.cta:hover,.cta:focus{
+    border: 1px solid black
+}
