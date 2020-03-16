@@ -18,6 +18,7 @@ import Favourite from "./components/favourite/Favourite";
 import { loadUser } from "./redux/actions/authActions";
 import EditRecipe from "./components/recipes/EditRecipe";
 import Landing from "./components/layouts/Landing";
+import PreviewRecipe from "./components/addRecipe/PreviewRecipe";
 
 if (localStorage.getItem("token")) {
 	setAuthToken(localStorage.getItem("token"));
@@ -38,6 +39,7 @@ function App() {
 						<Route exact path="/search" component={Search} />
 						<Route exact path="/category/:category" component={CategoryList} />
 						<Route exact path="/meal/:id" component={Recipe} />
+						<Route exact path="/preview" component={PreviewRecipe} />
 						<PrivateRoute exact path="/edit/:id" component={EditRecipe} />
 						<PrivateRoute exact path="/myrecipe" component={Recipe} />
 						<PrivateRoute exact path="/myRecipe/:id" component={Recipe} />

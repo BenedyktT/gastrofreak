@@ -9,7 +9,7 @@ const Landing = () => {
 			<h1>Welcome to Gastrofreak</h1>
 			<h3>What would you like to do?</h3>
 			<div className="landing-wrapper">
-				<Link to="/add" className="cta">
+				<Link to="/preview" className="cta">
 					<img src={add} alt="Add new recipe" />
 					<span className="cta__headline">I would like to add new recipy</span>
 					<span className="cta__paragraph">

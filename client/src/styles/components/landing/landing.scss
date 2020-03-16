@@ -15,6 +15,7 @@
     align-items: center;
     @include respond-to(wide-screens){
         grid-template-columns: 1fr 1fr;
+        width:50%
     }
 }
 .cta{   display: grid;
@@ -23,13 +24,16 @@
     gap: 1rem;
     padding:$padding;
     margin:1rem;
-    background: $blue-primary;
+    background: $gradient-blue;
     color:white;
+    border: 5px solid rgba(0, 0, 0, 0);
+    border-radius: 10px;
+    transition: border-color 350ms;
     img{
         width:100px;height: 100px;
      
     }
 }
 .cta:hover,.cta:focus{
-    border: 1px solid black
+    border: 5px solid $blue-b
 }

@@ -6,7 +6,15 @@
 .favourite-svg:focus {
   fill: $danger;
 }
+.inline.loader{
+  background: inherit;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: block;
+  transform: translate(0%,25%);
 
+}
 .loader {
   position: fixed;
   background: rgba($color: $black, $alpha: 0.4);

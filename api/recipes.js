@@ -78,6 +78,33 @@ router.post(
 	}
 );
 
+router.post(
+	"/preview",
+	[
+		check("title", "Title is Required")
+			.not()
+			.isEmpty(),
+		check("prep", "Preparation steps are required")
+			.not()
+			.isEmpty(),
+		check("ingr", "Please provide coma separated ingredienties").isLength({
+			min: 2
+		})
+	],
+	async (req, res) => {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return res.status(400).json({ errors: errors.array() });
+		}
+		try {
+			const recipe = await getNutritionValues([req.body]);
+			return res.json(recipe);
+		} catch (error) {
+			console.error(error);
+			res.status(500).json(error.message);
+		}
+	}
+);
 module.exports = router;
 /*
  */
