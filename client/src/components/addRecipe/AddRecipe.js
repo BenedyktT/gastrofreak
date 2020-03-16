@@ -16,7 +16,6 @@ const Recipe = ({
 	destroyRecipe,
 	getUserRecipe
 }) => {
-	useEffect(() => {}, []);
 	useEffect(() => {
 		const isExternalRecipe = history.location.pathname.includes("meal");
 		if (isExternalRecipe) {
