@@ -4,7 +4,8 @@ import {
 	GET_RECIPE,
 	ADD_SUCCESS,
 	DESTROY_RECIPE,
-	ADD_FAIL
+	ADD_FAIL,
+	ADD_START
 } from "../actions/types";
 const initialState = {
 	categories: [],
@@ -27,6 +28,8 @@ export default (state = initialState, { type, payload }) => {
 			return { ...state, recipe: "", loading: false };
 		case ADD_FAIL:
 			return { ...state, loading: false };
+		case ADD_START:
+			return { ...state, loading: true };
 		default:
 			return state;
 	}

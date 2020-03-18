@@ -1,4 +1,10 @@
-import { LOGIN_USER, USER_LOADED, LOGOUT_USER, REGISTER_USER } from "./types";
+import {
+	LOGIN_USER,
+	USER_LOADED,
+	LOGOUT_USER,
+	REGISTER_USER,
+	REGISTER_USER_FAIL
+} from "./types";
 import axios from "axios";
 import setAuthToken from "../../setAuthToken";
 import { setAlert } from "./alerts";
@@ -6,12 +12,13 @@ import { setAlert } from "./alerts";
 axios.defaults.headers.common["Content-Type"] = "application/json";
 export const registerUser = data => async dispatch => {
 	try {
-		await axios.post("/user", data);
-		dispatch({ type: REGISTER_USER });
+		const response = await axios.post("/user", data);
+		dispatch({ type: REGISTER_USER, payload: response.data });
 		dispatch(setAlert("User Created", "success"));
 	} catch (error) {
 		const errors = error.response.data.errors;
 		if (errors && errors.length) {
+			dispatch({ type: REGISTER_USER_FAIL });
 			errors.forEach(e => dispatch(setAlert(e.msg, "danger")));
 		}
 

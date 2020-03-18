@@ -37,3 +37,12 @@ $small: 0.7rem;
   color: $success;
   background: rgba($success, 0.2);
 }
+
+.btn{
+  padding: 1rem;
+  border-radius: 5px;
+  background-color: $blue-dark;
+  color: white;
+  border: none;
+  box-shadow: 1px 1px 5px 1px $black;
+}

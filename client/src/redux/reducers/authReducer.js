@@ -2,7 +2,9 @@ import {
 	LOGIN_USER,
 	USER_LOADED,
 	LOGOUT_USER,
-	REGISTER_USER
+	REGISTER_USER,
+	REGISTER_USER_FAIL,
+	REGISTER_USER_SUCCESS
 } from "../actions/types";
 
 const initialState = {
@@ -37,10 +39,18 @@ export default (state = initialState, action) => {
 				user: null,
 				isAuthenticated: false,
 				loading: false,
-				token: null
+				token: null,
+				isRegistered: null
 			};
-		case REGISTER_USER:
-			return { ...state, isRegistered: true };
+		case REGISTER_USER || REGISTER_USER_SUCCESS:
+			localStorage.setItem("token", payload.token);
+			return {
+				...state,
+				isRegistered: true,
+				loading: false
+			};
+		case REGISTER_USER_FAIL:
+			return { ...state, isRegistered: false, loading: false };
 
 		default:
 			return state;

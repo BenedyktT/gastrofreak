@@ -15,7 +15,7 @@ router.get("/", auth, async (req, res) => {
 		res.json(user);
 	} catch (e) {
 		console.error(e.message);
-		res.send(500).json({ msg: "server error" });
+		res.send(401).json({ msg: "server error" });
 	}
 });
 
@@ -62,7 +62,7 @@ router.post(
 				{ expiresIn: 360000 },
 				(err, token) => {
 					if (err) throw err;
-					res.json({ token });
+					return res.json({ token });
 				}
 			);
 		} catch (e) {

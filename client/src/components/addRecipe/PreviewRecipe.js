@@ -4,8 +4,15 @@ import GoBack from "../layouts/GoBack";
 import React, { useState, useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 import Loader from "../layouts/Loader";
+import { setAlert } from "../../redux/actions/alerts";
 
-const PreviewRecipe = ({ previewRecipe, recipe, history, loading }) => {
+const PreviewRecipe = ({
+	previewRecipe,
+	recipe,
+	history,
+	loading,
+	setAlert
+}) => {
 	const [value, setValue] = useState({
 		title: "placeholderTitle",
 		prep: "placeholderSteps",
@@ -27,6 +34,10 @@ const PreviewRecipe = ({ previewRecipe, recipe, history, loading }) => {
 				.toLowerCase()
 				.split(",")
 		};
+		if (!ingr) {
+			setAlert("Recipy required", "danger");
+			return;
+		}
 		setSubmit(true);
 		previewRecipe(recipe);
 	};
@@ -39,8 +50,7 @@ const PreviewRecipe = ({ previewRecipe, recipe, history, loading }) => {
 				<div className="preview-grid">
 					<div className="grid-left">
 						<form className="add-recipe" onSubmit={onSubmit}>
-							<div className="form__element form__element--textarea">
-								<label htmlFor=""></label>
+							<div className="add-recipe-input">
 								<textarea
 									name="ingr"
 									type="text"
@@ -50,9 +60,12 @@ const PreviewRecipe = ({ previewRecipe, recipe, history, loading }) => {
 								/>
 							</div>
 
-							<div className="form__element form__element--submit">
-								<div className=""></div>
-								<input type="submit" value="Calculate Nutritions" />
+							<div className="add-recipe-submit">
+								<input
+									className="btn"
+									type="submit"
+									value="Calculate Nutritions"
+								/>
 							</div>
 						</form>
 					</div>
@@ -77,8 +90,9 @@ const PreviewRecipe = ({ previewRecipe, recipe, history, loading }) => {
 								/>
 							</div>
 						) : (
-							<Loader className="inline" />
+							<h1>Enter recipy and click </h1>
 						)}
+						{loading && <Loader className="inline" />}
 					</div>
 				</div>
 			</div>
@@ -92,6 +106,7 @@ export default connect(
 		loading: state.recipeReducer.loading
 	}),
 	{
-		previewRecipe
+		previewRecipe,
+		setAlert
 	}
 )(PreviewRecipe);

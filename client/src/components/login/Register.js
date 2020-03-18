@@ -1,7 +1,22 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { Redirect } from "react-router-dom";
+import Loader from "../layouts/Loader";
+import setAuthToken from "../../setAuthToken";
+import { loadUser } from "../../redux/actions/authActions";
+import { connect } from "react-redux";
 
-const Register = ({ isRegistered, setAlert, registerUser }) => {
+const Register = ({
+	isRegistered,
+	setAlert,
+	registerUser,
+	loading,
+	loadUser
+}) => {
+	useEffect(() => {
+		if (localStorage.getItem("token")) {
+			loadUser();
+		}
+	}, [isRegistered, loading]);
 	const [value, setValue] = useState({
 		email: "",
 		password: "",
@@ -9,11 +24,13 @@ const Register = ({ isRegistered, setAlert, registerUser }) => {
 		name: ""
 	});
 	const { email, password, repeatPassword, name } = value;
+	const [isSubmitted, setSubmitted] = useState(false);
 	const onChange = e => {
 		setValue({ ...value, [e.target.name]: e.target.value });
 	};
 	const onSubmit = async e => {
 		e.preventDefault();
+		setSubmitted(true);
 		if (!name || !password) {
 			setAlert("All fields are required", "danger");
 			return;
@@ -25,47 +42,67 @@ const Register = ({ isRegistered, setAlert, registerUser }) => {
 
 		registerUser(value);
 	};
-	if (isRegistered) {
+	if (isRegistered && !loading) {
+		setAuthToken();
 		return <Redirect to="/" />;
 	}
+
 	return (
 		<Fragment>
-			<form onSubmit={onSubmit} className="form register">
-				<div className="form__element">
-					<label htmlFor="name">Name: </label>
-					<input name="name" type="text" value={name} onChange={onChange} />
-				</div>
-				<div className="form__element">
-					<label htmlFor="email">Email: </label>
-					<input name="email" type="email" value={email} onChange={onChange} />
-				</div>
-				<div className="form__element">
-					{" "}
-					<label htmlFor="password">Pasword: </label>
-					<input
-						autoComplete="new-password"
-						name="password"
-						type="password"
-						value={password}
-						onChange={onChange}
-					/>
-				</div>
-				<div className="form__element">
-					{" "}
-					<label htmlFor="repeatPassword">Repeat Pasword: </label>
-					<input
-						name="repeatPassword"
-						type="password"
-						value={repeatPassword}
-						onChange={onChange}
-					/>
-				</div>
-				<div className="submit">
-					<input type="submit" value="Register" />
-				</div>
-			</form>
+			{loading && isSubmitted ? (
+				<Loader className="inline" />
+			) : (
+				<form onSubmit={onSubmit} className="form register">
+					<div className="form__element">
+						<label htmlFor="name">Name: </label>
+						<input
+							placeholder="Name"
+							name="name"
+							type="text"
+							value={name}
+							onChange={onChange}
+						/>
+					</div>
+					<div className="form__element">
+						<label htmlFor="email">Email: </label>
+						<input
+							placeholder="email"
+							name="email"
+							type="email"
+							value={email}
+							onChange={onChange}
+						/>
+					</div>
+					<div className="form__element">
+						{" "}
+						<label htmlFor="password">Pasword: </label>
+						<input
+							autoComplete="new-password"
+							name="password"
+							type="password"
+							value={password}
+							onChange={onChange}
+							placeholder="password"
+						/>
+					</div>
+					<div className="form__element">
+						{" "}
+						<label htmlFor="repeatPassword">Repeat Pasword: </label>
+						<input
+							name="repeatPassword"
+							type="password"
+							value={repeatPassword}
+							onChange={onChange}
+							placeholder="Repeat password"
+						/>
+					</div>
+					<div className="submit">
+						<input type="submit" value="Register" />
+					</div>
+				</form>
+			)}
 		</Fragment>
 	);
 };
 
-export default Register;
+export default connect(null, { loadUser })(Register);
