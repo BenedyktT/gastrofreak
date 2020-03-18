@@ -98,8 +98,11 @@ input:focus {
 }
 
 .recipe__nutrition-details {
-  width: 55%;
+  width: 95%;
   margin: 0 auto;
+  @include respond-to(wide-screens){
+    width: 55%;
+  }
 }
 
 .recipe__ingredients {

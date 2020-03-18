@@ -64,6 +64,13 @@ router.post(
 			return res.status(400).json({ errors: errors.array() });
 		}
 		try {
+			const userRecipe = await UserRecipe.find({ user: req.user });
+			const recipeExist = userRecipe.find(
+				({ title }) => title === req.body.title
+			);
+			if (recipeExist) {
+				return res.status(400).json("recipe already exist");
+			}
 			const newRecipe = new UserRecipe({
 				...req.body,
 				user: req.user

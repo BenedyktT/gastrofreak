@@ -4,7 +4,8 @@ import {
 	GET_RECIPE,
 	ADD_SUCCESS,
 	DESTROY_RECIPE,
-	ADD_FAIL
+	ADD_FAIL,
+	ADD_START
 } from "./types";
 import { setAlert } from "./alerts";
 import axios from "axios";
@@ -65,6 +66,12 @@ export const destroyRecipe = () => dispatch => {
 };
 
 export const previewRecipe = data => async dispatch => {
-	const res = await axios.post("/recipes/preview", data);
-	dispatch({ type: ADD_SUCCESS, payload: res.data });
+	dispatch({ type: ADD_START });
+	try {
+		const res = await axios.post("/recipes/preview", data);
+		dispatch({ type: ADD_SUCCESS, payload: res.data });
+	} catch (error) {
+		dispatch(setAlert("Please include valid recipy", "danger"));
+		dispatch({ type: ADD_FAIL });
+	}
 };

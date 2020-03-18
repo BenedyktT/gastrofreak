@@ -46,7 +46,11 @@ router.post("/:id", auth, async (req, res) => {
 		const { id } = req.params;
 		const user = await User.findById(req.user);
 		const meal = await getMeal("i", id);
-		const isExistingOnFavourite = await Recipe.findOne({ recipeId: id });
+
+		const isExistingOnFavourite = await Recipe.findOne({
+			recipeId: id,
+			user: req.user
+		});
 		if (user && meal && !isExistingOnFavourite) {
 			const addRecipeToFavourite = new Recipe({
 				user: req.user,

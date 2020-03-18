@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 import { ReactComponent as Account } from "../../assets/account.svg";
-import { ReactComponent as Dashboard } from "../../assets/dashboard.svg";
+import { ReactComponent as Home } from "../../assets/home.svg";
 import { ReactComponent as Add } from "../../assets/add.svg";
 import { ReactComponent as Favourite } from "../../assets/favourite.svg";
 import { ReactComponent as Search } from "../../assets/search.svg";
+
 import { withRouter } from "react-router";
 
 import { Link } from "react-router-dom";
@@ -15,7 +16,7 @@ const FooterNav = ({ history }) => {
 		setElementActive({ [e.target.name]: true });
 	};
 	const trackPath = path => {
-		if (path === "/") return setElementActive({});
+		if (path === "/") return setElementActive({ home: true });
 		if (path.includes("/search")) return setElementActive({ search: true });
 		if (path.includes("myRecipes")) return setElementActive({ account: true });
 		if (path.includes("favourite"))
@@ -30,7 +31,23 @@ const FooterNav = ({ history }) => {
 	return (
 		<nav className="footernav">
 			<div className="footernav__elements">
-				<Link to="/" onClick={activate} name="search">
+				<Link to="/" onClick={activate} name="home">
+					<Home
+						className={classnames("footernav__element", {
+							active: elementActive.home
+						})}
+					/>
+				</Link>
+				<span
+					className={classnames("footernav__text", {
+						active: elementActive.home
+					})}
+				>
+					Home
+				</span>
+			</div>
+			<div className="footernav__elements">
+				<Link to="/search" onClick={activate} name="search">
 					<Search
 						className={classnames("footernav__element", {
 							active: elementActive.search

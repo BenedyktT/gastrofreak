@@ -1,5 +1,29 @@
 .preview-grid{
     display:grid;
-    grid-template-columns: 25% 1fr;
-    margin:3rem
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    
+    @include respond-to(wide-screens){
+        grid-template-columns: 25% 1fr;
+        margin:3rem
+    }
+   
+
 }
+.add-recipe-input{
+    width: 85%;
+    textarea{
+        height: 100px;
+        padding:1rem;
+        border:1px solid $black;
+        width:100%;
+        @include respond-to(wide-screens){
+            height: 200px;
+            width: 100%;
+        }
+    }
+       
+}
+.add-recipe-submit{input{width:100%}}

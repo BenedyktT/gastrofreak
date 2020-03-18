@@ -21,7 +21,6 @@ const NutritionTable = ({ nutrients, portion, totalWeight }) => {
 	if (!Protein) Protein = 0;
 	if (!Sugars) Sugars = 0;
 	const calculatePortion = nutrient => {
-		console.log(typeof nutrient);
 		return nutrient
 			? Math.floor(parseInt((portion * nutrient) / totalWeight))
 			: 0;

@@ -31,9 +31,10 @@ function App() {
 		<Provider store={store}>
 			<div className="App">
 				<Router>
+					<Alert />
 					<Header />
 					<Route exact path="/login" component={Login} />
-					<Alert />
+
 					<Switch>
 						<Route exact path="/" component={Landing} />
 						<Route exact path="/search" component={Search} />
