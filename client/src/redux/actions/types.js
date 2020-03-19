@@ -16,3 +16,5 @@ export const ADD_FAIL = "ADD_FAIL";
 export const ADD_START = "ADD_START";
 export const REGISTER_USER_FAIL = "REGISTER_USER_FAIL";
 export const REGISTER_USER_SUCCESS = "REGISTER_USER_SUCCESS";
+export const ENTER_EDIT_MODE = "ENTER_EDIT_MODE";
+export const EXIT_EDIT_MODE = "EXIT_EDIT_MODE";

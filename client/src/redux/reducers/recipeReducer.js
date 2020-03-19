@@ -5,13 +5,16 @@ import {
 	ADD_SUCCESS,
 	DESTROY_RECIPE,
 	ADD_FAIL,
-	ADD_START
+	ADD_START,
+	ENTER_EDIT_MODE,
+	EXIT_EDIT_MODE
 } from "../actions/types";
 const initialState = {
 	categories: [],
 	meals: [],
 	recipe: "",
-	loading: true
+	loading: true,
+	isEditMode: false
 };
 export default (state = initialState, { type, payload }) => {
 	switch (type) {
@@ -30,6 +33,10 @@ export default (state = initialState, { type, payload }) => {
 			return { ...state, loading: false };
 		case ADD_START:
 			return { ...state, loading: true };
+		case ENTER_EDIT_MODE:
+			return { ...state, isEditMode: payload };
+		case EXIT_EDIT_MODE:
+			return { ...state, isEditMode: false };
 		default:
 			return state;
 	}

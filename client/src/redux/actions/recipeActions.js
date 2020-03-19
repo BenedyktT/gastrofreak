@@ -5,7 +5,9 @@ import {
 	ADD_SUCCESS,
 	DESTROY_RECIPE,
 	ADD_FAIL,
-	ADD_START
+	ADD_START,
+	ENTER_EDIT_MODE,
+	EXIT_EDIT_MODE
 } from "./types";
 import { setAlert } from "./alerts";
 import axios from "axios";
@@ -75,3 +77,9 @@ export const previewRecipe = data => async dispatch => {
 		dispatch({ type: ADD_FAIL });
 	}
 };
+
+export const enterEditMode = element => dispatch => {
+	dispatch({ type: ENTER_EDIT_MODE, payload: element });
+};
+export const exitEditMode = () => dispatch =>
+	dispatch({ type: EXIT_EDIT_MODE });
