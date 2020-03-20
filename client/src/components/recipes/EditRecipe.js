@@ -1,175 +1,120 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { connect } from "react-redux";
-import NutritionTable from "./NutritionTable";
-import {
-  getRecipe,
-  destroyRecipe,
-  getUserRecipe
-} from "../../redux/actions/recipeActions";
-import GoBack from "../layouts/GoBack";
-import { Link } from "react-router-dom";
+import { addRecipe, updRecipe } from "../../redux/actions/recipeActions";
+import Loader from "../layouts/Loader";
+import { setAlert } from "../../redux/actions/alerts";
 
 const EditRecipe = ({
-  getRecipe,
-  recipe,
-  match,
+  addRecipe,
+  editRecipe,
   history,
-  destroyRecipe,
-  getUserRecipe
+  loading,
+  match,
+  updRecipe,
+  recipe
 }) => {
-  const {
-    prep,
-    title,
-    ingr,
-    calories,
-    totalWeight,
-    healthLabels,
-    nutrients
-  } = recipe;
-  const [ingredients, setingredients] = useState(ingr);
-  const [portion, setPortion] = useState(300);
-  const initialValue = {
-    title: false,
-    prep: false,
-    ingr: false
-  };
-  const [isEditMode, setEditMode] = useState(initialValue);
-  const [isFinishEditing, setFinishEditing] = useState(initialValue);
-  const [recipeValue, setrecipeValue] = useState({ title, prep, ingr });
-
+  const { title, prep, ingr } = editRecipe;
+  const { external, id } = match.params;
+  const [value, setValue] = useState({ title, prep, ingr: ingr.join(",") });
+  const [isSubmit, setSubmit] = useState(false);
+  const isExternal = external === "true" ? true : false;
   const onChange = e => {
-    setrecipeValue({ ...recipeValue, [e.target.name]: e.target.value });
-
-    if (isFinishEditing) {
-      setFinishEditing(false);
-    }
+    setValue({ ...value, [e.target.name]: e.target.value });
   };
-  const submitChanges = e => {
-    const name = e.target.name.split("_")[1];
-    if (recipe[name] === recipeValue[name]) {
-      setFinishEditing({ ...isFinishEditing, [name]: true });
-      setEditMode(initialValue);
-      setFinishEditing({ ...isFinishEditing, [name]: false });
+  const onSubmit = e => {
+    e.preventDefault();
+    const recipe = {
+      ...value,
+      ingr: value.ingr
+        .replace(/\r?\n|\r/g, " ")
+        .trim()
+        .toLowerCase()
+        .split(",")
+    };
+
+    if (isExternal) {
+      try {
+        addRecipe(recipe);
+        setSubmit(true);
+
+        return;
+      } catch (error) {
+        setSubmit(false);
+        setAlert("Error, try again", "danger");
+      }
+    }
+    try {
+      updRecipe(id, recipe);
+      setSubmit(true);
       return;
+    } catch (error) {
+      setSubmit(false);
+      setAlert("Error, try again", "danger");
     }
-    if (name === "ingr") {
-      setingredients(recipeValue.ingr.split(","));
-    }
-
-    setFinishEditing({ ...isFinishEditing, [name]: true });
-    setEditMode(initialValue);
-    setFinishEditing({ ...isFinishEditing, [name]: false });
   };
-  const render = () => {
-    return (
-      <div className="recipe">
-        <GoBack history={history} />
+  useEffect(() => {
+    if (isSubmit && !loading && recipe) {
+      history.push("/myRecipes");
+    }
+  }, [loading, recipe, isSubmit]);
+  return (
+    <Fragment>
+      {isSubmit && loading && <Loader />}
+      <div className="container">
+        <h1>Add your own Recipe</h1>
 
-        <div className="recipe__title">
-          {!isEditMode.title && <button>Edit</button>}(
-          <div className="recipe__title">{recipeValue.title}</div>
-          )}
-        </div>
-        <div className="recipe__health-labels">
-          <h3>Health labels:</h3>
-          <p className="recipe__health-labels-elements">
-            {healthLabels.map(e => `${e.toLowerCase().replace(/_+/g, " ")},`)}
-          </p>
-        </div>
-        <div className="recipe__nutrition-summary">
-          <span>
-            <label htmlFor="portion">Portion:</label>
-            <input
-              style={{ width: "100px" }}
-              name="portion"
-              type="number"
-              value={portion}
-              onChange={e => setPortion(e.target.value)}
-            />
-            g
-          </span>
-          <span>Total weight: {parseInt(totalWeight)}g</span>
-          <span>Kcal: {calories}</span>
-        </div>
-        <div className="recipe__nutrition-details">
-          <NutritionTable
-            nutrients={nutrients}
-            portion={portion}
-            totalWeight={totalWeight}
-          />
-        </div>
-        <div className="recipe__prep">
-          <h3>Prep:</h3>
-          {!isEditMode.prep && (
-            <button onClick={() => setEditMode({ ...isEditMode, prep: true })}>
-              Edit
-            </button>
-          )}
-          {isEditMode.prep && !isFinishEditing.prep ? (
-            <Fragment>
-              <textarea
-                className="edit-input prep-edit"
-                name="prep"
-                value={recipeValue.prep}
-                onChange={onChange}
-              ></textarea>
-              {
-                <input
-                  type="submit"
-                  name="edit_prep"
-                  onClick={submitChanges}
-                  value="submit changes"
-                />
-              }
-            </Fragment>
-          ) : (
-            <p>{recipeValue.prep}</p>
-          )}
-        </div>
-        <div className="recipe__ingredients">
-          {!isEditMode.ingr && (
-            <button onClick={() => setEditMode({ ...isEditMode, ingr: true })}>
-              Edit
-            </button>
-          )}
-          {isEditMode.ingr && !isFinishEditing.ingr ? (
-            <Fragment>
-              <textarea
-                className="edit-input ingr-edit"
-                name="ingr"
-                value={recipeValue.ingr}
-                onChange={onChange}
-              ></textarea>
+        <div className="add-container">
+          <form className="add-recipe" onSubmit={onSubmit}>
+            <div className="form__element">
+              {" "}
+              <label htmlFor="title">Title: </label>
               <input
-                type="submit"
-                name="edit_ingr"
-                onClick={submitChanges}
-                value="submit changes"
+                name="title"
+                type="text"
+                value={value.title}
+                onChange={onChange}
+                placeholder="Title"
               />
-            </Fragment>
-          ) : (
-            <ul className="ingredient__elements">
-              {ingredients.map(e => (
-                <li key={Math.random()} className="ingredient__element">
-                  {e}
-                </li>
-              ))}
-            </ul>
-          )}
+            </div>
+            <div className="form__element form__element--textarea">
+              <label htmlFor="prep">Preparation: </label>
+              <textarea
+                name="prep"
+                type="text"
+                value={value.prep}
+                onChange={onChange}
+                placeholder="Please provide preparations step"
+              />
+            </div>
+            <div className="form__element form__element--textarea">
+              <label htmlFor="ingr">Ingredienties: </label>
+              <textarea
+                name="ingr"
+                type="text"
+                value={value.ingr}
+                onChange={onChange}
+                placeholder="Please provide comma separated ingredients list (ex: 50g ham, 125g onions, 1kg lamb etc...)"
+              />
+            </div>
+            <div className="form__element form__element--submit">
+              <div className=""></div>
+              <input type="submit" value="submit" />
+            </div>
+          </form>
         </div>
       </div>
-    );
-  };
-  return recipe ? render() : <div className="">Loading...</div>;
+    </Fragment>
+  );
 };
 
 export default connect(
   state => ({
+    editRecipe: state.recipeReducer.editRecipe,
+    loading: state.recipeReducer.loading,
     recipe: state.recipeReducer.recipe
   }),
   {
-    getRecipe,
-    destroyRecipe,
-    getUserRecipe
+    addRecipe,
+    updRecipe
   }
 )(EditRecipe);

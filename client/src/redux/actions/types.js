@@ -16,3 +16,6 @@ export const ADD_FAIL = "ADD_FAIL";
 export const ADD_START = "ADD_START";
 export const REGISTER_USER_FAIL = "REGISTER_USER_FAIL";
 export const REGISTER_USER_SUCCESS = "REGISTER_USER_SUCCESS";
+export const UPDATE_START = "UPDATE_START";
+export const UPDATE_FAIL = "UPDATE_FAIL";
+export const UPDATE_SUCCESS = "UPDATE_SUCCESS";

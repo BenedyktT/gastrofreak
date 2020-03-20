@@ -6,14 +6,13 @@
 .favourite-svg:focus {
   fill: $danger;
 }
-.inline.loader{
+.inline.loader {
   background: inherit;
   position: relative;
   height: 100%;
   width: 100%;
   display: block;
-  transform: translate(0%,25%);
-
+  transform: translate(0%, 25%);
 }
 .loader {
   position: fixed;
@@ -45,14 +44,20 @@
   display: flex;
   flex-direction: column;
 }
-.edit-svg {
-  width: 25px;
-  height: 25px;
-  margin: 1rem 0.5rem;
-  align-self: flex-end;
-  position: relative;
+.to-edit {
+  color: inherit;
+  display: flex;
+  align-items: center;
   &:focus,
   &:hover {
     fill: $success;
+    color: $success;
   }
+}
+.edit-svg {
+  width: 25px;
+  height: 25px;
+  margin: 0rem 0.5rem;
+  align-self: flex-end;
+  position: relative;
 }

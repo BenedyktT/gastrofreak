@@ -21,38 +21,42 @@ import Landing from "./components/layouts/Landing";
 import PreviewRecipe from "./components/addRecipe/PreviewRecipe";
 
 if (localStorage.getItem("token")) {
-	setAuthToken(localStorage.getItem("token"));
+  setAuthToken(localStorage.getItem("token"));
 }
 function App() {
-	useEffect(() => {
-		store.dispatch(loadUser());
-	}, []);
-	return (
-		<Provider store={store}>
-			<div className="App">
-				<Router>
-					<Alert />
-					<Header />
-					<Route exact path="/login" component={Login} />
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
+  return (
+    <Provider store={store}>
+      <div className="App">
+        <Router>
+          <Alert />
+          <Header />
+          <Route exact path="/login" component={Login} />
 
-					<Switch>
-						<Route exact path="/" component={Landing} />
-						<Route exact path="/search" component={Search} />
-						<Route exact path="/category/:category" component={CategoryList} />
-						<Route exact path="/meal/:id" component={Recipe} />
-						<Route exact path="/preview" component={PreviewRecipe} />
-						<PrivateRoute exact path="/edit/:id" component={EditRecipe} />
-						<PrivateRoute exact path="/myrecipe" component={Recipe} />
-						<PrivateRoute exact path="/myRecipe/:id" component={Recipe} />
-						<PrivateRoute exact path="/myRecipes" component={MyRecipes} />
-						<PrivateRoute exact path="/add" component={Add} />
-						<PrivateRoute exact path="/favourite" component={Favourite} />
-					</Switch>
-					<FooterNav />
-				</Router>
-			</div>
-		</Provider>
-	);
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/search" component={Search} />
+            <Route exact path="/category/:category" component={CategoryList} />
+            <Route exact path="/meal/:id" component={Recipe} />
+            <Route exact path="/preview" component={PreviewRecipe} />
+            <PrivateRoute
+              exact
+              path="/edit/:id/:external"
+              component={EditRecipe}
+            />
+            <PrivateRoute exact path="/myrecipe" component={Recipe} />
+            <PrivateRoute exact path="/myRecipe/:id" component={Recipe} />
+            <PrivateRoute exact path="/myRecipes" component={MyRecipes} />
+            <PrivateRoute exact path="/add" component={Add} />
+            <PrivateRoute exact path="/favourite" component={Favourite} />
+          </Switch>
+          <FooterNav />
+        </Router>
+      </div>
+    </Provider>
+  );
 }
 
 export default App;

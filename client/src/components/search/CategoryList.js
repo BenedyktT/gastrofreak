@@ -6,47 +6,47 @@ import GoBack from "../layouts/GoBack";
 import { getFavourite } from "../../redux/actions/favouriteActions";
 
 const CategoryList = ({
-	getCategory,
-	meals,
-	match,
-	history,
-	favourite,
-	getFavourite
+  getCategory,
+  meals,
+  match,
+  history,
+  favourite,
+  getFavourite
 }) => {
-	const { category } = match.params;
-	useEffect(() => {
-		getCategory(category);
-		getFavourite();
-	}, []);
+  const { category } = match.params;
+  useEffect(() => {
+    getCategory(category);
+    getFavourite();
+  }, []);
 
-	return (
-		<div className="category-wrapper">
-			<GoBack history={history} />
-			<ul className="meals__grid">
-				{meals.length &&
-					meals.map(({ strMeal, strMealThumb, idMeal }) => (
-						<CategoryListItem
-							key={idMeal}
-							className="categories_item"
-							thumb={strMealThumb}
-							title={strMeal}
-							id={idMeal}
-							idType={"recipeId"}
-							mealsList={favourite}
-						/>
-					))}
-			</ul>
-		</div>
-	);
+  return (
+    <div className="category-wrapper">
+      <GoBack history={history} />
+      <ul className="meals__grid">
+        {meals.length &&
+          meals.map(({ strMeal, strMealThumb, idMeal }) => (
+            <CategoryListItem
+              key={idMeal}
+              className="categories_item"
+              thumb={strMealThumb}
+              title={strMeal}
+              id={idMeal}
+              idType={"recipeId"}
+              mealsList={favourite}
+            />
+          ))}
+      </ul>
+    </div>
+  );
 };
 
 export default connect(
-	state => ({
-		meals: state.recipeReducer.meals,
-		favourite: state.favouriteReducer.favourite
-	}),
-	{
-		getCategory,
-		getFavourite
-	}
+  state => ({
+    meals: state.recipeReducer.meals,
+    favourite: state.favouriteReducer.favourite
+  }),
+  {
+    getCategory,
+    getFavourite
+  }
 )(CategoryList);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import { setAlert } from "../../redux/actions/alerts";
@@ -24,7 +24,7 @@ const AddFavourite = ({
       getFavourite();
       setAlert("Successfully added to favourites", "success");
     } catch (error) {
-      setAlert("Couldn't add to favourite, please try refresh page");
+      setAlert("Couldn't add to favourite, please try refresh page", "danger");
     }
   };
   const removeFavourite = async id => {
@@ -41,7 +41,7 @@ const AddFavourite = ({
         return;
       }
     } catch (error) {
-      setAlert("Couldn't delete, please try refresh page");
+      setAlert("Couldn't delete, please try refresh page", "danger");
     }
   };
 
