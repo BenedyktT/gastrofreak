@@ -7,7 +7,7 @@ const Header = ({ isAuthenticated, user, logout }) => {
   return (
     <div className="header">
       <Link to="/">
-        <img style={{ width: "50px" }} src={logo} />
+        <img alt="gastro freak logo" style={{ width: "50px" }} src={logo} />
       </Link>
       <div className="header__greet">
         {isAuthenticated ? (

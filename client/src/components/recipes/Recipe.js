@@ -7,10 +7,9 @@ import {
   getUserRecipe
 } from "../../redux/actions/recipeActions";
 import GoBack from "../layouts/GoBack";
-import { Link } from "react-router-dom";
-import moduleName from "module";
 import Loader from "../layouts/Loader";
 import { ReactComponent as Edit } from "../../assets/edit.svg";
+import { Link } from "react-router-dom";
 
 const Recipe = ({
   getRecipe,
@@ -20,9 +19,8 @@ const Recipe = ({
   destroyRecipe,
   getUserRecipe
 }) => {
-  useEffect(() => {}, []);
+  const isExternalRecipe = history.location.pathname.includes("meal");
   useEffect(() => {
-    const isExternalRecipe = history.location.pathname.includes("meal");
     if (isExternalRecipe) {
       getRecipe(match.params.id);
     } else {
@@ -47,8 +45,17 @@ const Recipe = ({
     return (
       <div className="recipe">
         <GoBack history={history} />
+
+        <Link
+          className="to-edit"
+          to={`/edit/${match.params.id}/${isExternalRecipe}`}
+        >
+          <Edit className="edit-svg" />
+          Edit
+        </Link>
+
         <div className=" recipe__element recipe__title">
-          <h1>{title}</h1> <Edit className="edit-svg" />
+          <h1>{title}</h1>
         </div>
         <div className="recipe__health-labels">
           <h3>Health labels:</h3>
@@ -81,7 +88,6 @@ const Recipe = ({
         <div className="recipe__element recipe__prep">
           <h3>Prep:</h3>
           <p>{prep}</p>
-          <Edit className="edit-svg" />
         </div>
         <div className="recipe__element recipe__ingredients">
           <ul className="ingredient__elements">
@@ -91,7 +97,6 @@ const Recipe = ({
               </li>
             ))}
           </ul>
-          <Edit className="edit-svg" />
         </div>
       </div>
     );
