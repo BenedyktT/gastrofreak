@@ -29,7 +29,13 @@ const Recipe = ({
     return () => {
       destroyRecipe();
     };
-  }, []);
+  }, [
+    destroyRecipe,
+    getUserRecipe,
+    getRecipe,
+    match.params.id,
+    isExternalRecipe
+  ]);
   const [portion, setPortion] = useState(300);
   const render = () => {
     const {

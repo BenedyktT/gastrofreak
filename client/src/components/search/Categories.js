@@ -2,14 +2,13 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { getCategories } from "../../redux/actions/recipeActions";
 import Category from "./Category";
-import { Link } from "react-router-dom";
 
 const Categories = ({ getCategories, categories }) => {
   useEffect(() => {
     if (!categories.length) {
       getCategories();
     }
-  }, []);
+  }, [categories, getCategories]);
   return (
     <div className="category-wrapper">
       <h3 className="text-big">Or pick category:</h3>
