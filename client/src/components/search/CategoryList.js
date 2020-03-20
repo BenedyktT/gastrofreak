@@ -17,7 +17,7 @@ const CategoryList = ({
   useEffect(() => {
     getCategory(category);
     getFavourite();
-  }, []);
+  }, [getCategory, getFavourite, category]);
 
   return (
     <div className="category-wrapper">

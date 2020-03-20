@@ -9,7 +9,7 @@ import CategoryListItem from "../search/CategoryListItem";
 const FavouriteList = ({ history, getRecipeList, recipes, idType }) => {
   useEffect(() => {
     getRecipeList();
-  }, []);
+  }, [getRecipeList]);
   return (
     <div className="category-wrapper">
       <GoBack history={history} />

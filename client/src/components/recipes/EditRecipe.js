@@ -56,7 +56,7 @@ const EditRecipe = ({
     if (isSubmit && !loading && recipe) {
       history.push("/myRecipes");
     }
-  }, [loading, recipe, isSubmit]);
+  }, [loading, recipe, isSubmit, history]);
   return (
     <Fragment>
       {isSubmit && loading && <Loader />}
