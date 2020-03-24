@@ -1,10 +1,10 @@
-import express from "express";
+const express = require("express");
 const router = express.Router();
-import auth from "./helper/auth";
-import User from "../models/User";
-import jwt from "jsonwebtoken";
-import { check, validationResult } from "express-validator";
-import bcrypt from "bcryptjs";
+const auth = require("./helper/auth");
+const User = require("../models/User");
+const jwt = require("jsonwebtoken");
+const { check, validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs");
 
 // @route GET api/auth
 // @desc
@@ -15,7 +15,7 @@ router.get("/", auth, async (req, res) => {
     res.json(user);
   } catch (e) {
     console.error(e.message);
-    res.send(500).json({ msg: "server error" });
+    res.send(401).json({ msg: "server error" });
   }
 });
 
@@ -61,7 +61,7 @@ router.post(
         { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;
-          res.json({ token });
+          return res.json({ token });
         }
       );
     } catch (e) {
@@ -71,4 +71,4 @@ router.post(
   }
 );
 
-export default router;
+module.exports = router;
