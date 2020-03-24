@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "description": "Application aims to help track of nutrition values of favourite recipes\"",
   "main": "server.js",
-  "jest":{"testEnvironment": "node"},
+  "jest": {
+    "testEnvironment": "node"
+  },
   "scripts": {
     "test": "jest --watch",
     "start": "node server.js",
-    "server": "nodemon server.js --ignore './client/'",
-    "client": "npm run start --prefix client",
+    "server": "nodemon server.js --ignore '../client/'",
+    "client": "cd ../&&npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false  npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false  cd../&&npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",
@@ -44,6 +46,6 @@
     "express": "^4.17.1",
     "express-validator": "^6.4.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.3"
+    "mongoose": "^5.9.6"
   }
 }
