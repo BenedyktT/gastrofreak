@@ -1,12 +1,10 @@
 const axios = require("axios");
-
 module.exports = async (queryType, item, serving = 1) => {
 	try {
 		const type = queryType === "s" ? "search" : "lookup";
 		const response = await axios.get(
 			`https://www.themealdb.com/api/json/v1/1/${type}.php?${queryType}=${item}`
 		);
-
 		if (response.data.meals) {
 			const recipe = response.data.meals.map((meal, i, arr) => ({
 				title: meal.strMeal,
@@ -27,6 +25,7 @@ module.exports = async (queryType, item, serving = 1) => {
 					const measures = extractItem("strMeasure");
 					//combine measure and ingredients
 					acc = ingr.map((e, i) => `${measures[i]} ${e}`);
+
 					return acc;
 				}, [])
 			}));
