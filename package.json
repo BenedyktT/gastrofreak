@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Application aims to help track of nutrition values of favourite recipes\"",
   "main": "server.js",
+  "jest":{"testEnvironment": "node"},
   "scripts": {
-    "test": "jest",
+    "test": "jest --watch",
     "start": "node server.js",
     "server": "nodemon server.js --ignore './client/'",
     "client": "npm run start --prefix client",
@@ -33,6 +34,7 @@
     "babel-preset-env": "^1.7.0",
     "concurrently": "^5.1.0",
     "esm": "^3.2.25",
+    "jest": "^25.1.0",
     "nodemon": "^2.0.2"
   },
   "dependencies": {
