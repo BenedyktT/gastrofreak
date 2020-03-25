@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Application aims to help track of nutrition values of favourite recipes\"",
   "main": "server.js",
-  "jest":{"testEnvironment": "node"},
+  "jest": {
+    "testEnvironment": "node"
+  },
   "scripts": {
     "test": "jest --watch",
     "start": "node server.js",
