@@ -89,4 +89,9 @@ describe("trimRecipe", () => {
   it("should return an object", () => {
     expect(typeof trimRecipe(response.meals)).toBe("object");
   });
+  it("should return trimmed object", () => {
+    const result = trimRecipe(response.meals);
+    expect(result).not.toHaveProperty("strMeasure");
+    expect(result[0].title).toBe("Teriyaki Chicken Casserole");
+  });
 });

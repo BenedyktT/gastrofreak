@@ -21,12 +21,13 @@ app.use("/favourite", favourite);
 app.use("/userRecipes", userRecipes);
 app.use(express.static("client/build"));
 app.get("*", (req, res) => {
-	res.sendFile(path.join(__dirname, "build", "index.html"));
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 app.listen(PORT, (req, res) => {
-	console.log(`server is working on port ${PORT}`);
+  console.log(`server is working on port ${PORT}`);
 });
 
+module.exports = app;
 //https://developer.edamam.com/admin/applications/1409619312049
 //https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata
