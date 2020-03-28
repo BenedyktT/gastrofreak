@@ -10,7 +10,7 @@
     ]
   },
   "scripts": {
-    "test": "jest --watch",
+    "test": "jest --runInBand  --watch  --detectOpenHandles",
     "start": "node server.js",
     "server": "nodemon server.js --ignore './client/'",
     "client": "npm run start --prefix client",
@@ -40,15 +40,14 @@
     "babel-preset-env": "^1.7.0",
     "concurrently": "^5.1.0",
     "esm": "^3.2.25",
-    "jest": "^25.1.0",
-    "mockgoose": "^8.0.4",
+    "jest": "^24.9.0",
+    "mongodb-memory-server": "^6.5.0",
     "nodemon": "^2.0.2",
     "supertest": "^4.0.2"
   },
   "dependencies": {
     "axios": "^0.19.2",
     "babel-jest": "^24.9.0",
-    "jest": "24.9.0",
     "jest-environment-jsdom-fourteen": "1.0.1",
     "jest-resolve": "24.9.0",
     "jest-watch-typeahead": "0.4.2",

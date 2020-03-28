@@ -2,7 +2,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const express = require("express");
 const recipes = require("./api/recipes");
-const connectDB = require("./config/config");
+const { connectDB } = require("./config/config");
 const categories = require("./api/categories");
 const user = require("./api/user");
 const auth = require("./api/auth");
@@ -24,9 +24,9 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
-app.listen(PORT, (req, res) => {
+/* app.listen(PORT, (req, res) => {
   console.log(`server is working on port ${PORT}`);
-});
+}); */
 
 module.exports = app;
 //https://developer.edamam.com/admin/applications/1409619312049
